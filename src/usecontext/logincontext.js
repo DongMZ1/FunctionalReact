@@ -1,3 +1,3 @@
-import React from 'react'
+import {createContext} from 'react'
 
-export default LoginContext = React.createContext(null);
+export const LoginContext = createContext(null);
