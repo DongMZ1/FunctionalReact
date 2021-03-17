@@ -1,11 +1,9 @@
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
 import {FaHome, FaReact, FaEnvelopeOpenText, FaFacebook, FaInstagramSquare, FaLinkedinIn, } from "react-icons/fa";
 import {MdAccountCircle} from 'react-icons/md'
-import GitIcon from 'react-ionicons/lib/LogoGithub'
 import { NavLink } from "react-router-dom";
-
+import { LinkContainer } from 'react-router-bootstrap';
 const Topnavbar = () => {
 
     return (
@@ -15,13 +13,18 @@ const Topnavbar = () => {
         <Nav className="mr-auto">
             {/*Navbar in here */}
 
-        <Navbar.Link href ="#/">
-            <FaHome fontSize="35px" /><span style={{whiteSpace: "nowrap"}}>HOME PAGE</span>
-        </Navbar.Link>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav.Link href="#/">
+            <FaHome fontSize="50px" /><span style={{whiteSpace: "nowrap"}}>HOME PAGE</span>
+            </Nav.Link>
 
-        <Navbar.Link href="#/Auth">
+
+        <Nav.Link href="#/Auth">
             <MdAccountCircle fontSize="50px" /><span style={{whiteSpace: "nowrap"}}>Account</span>
-        </Navbar.Link>
+            </Nav.Link>
+            </Navbar.Collapse>
+
 
             </Nav>
 
