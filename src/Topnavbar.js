@@ -1,19 +1,31 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Navbar, Nav} from 'react-bootstrap';
+import {Navbar, Nav, NavItem} from 'react-bootstrap';
 import {FaHome, FaReact, FaEnvelopeOpenText, FaFacebook, FaInstagramSquare, FaLinkedinIn, } from "react-icons/fa";
+import {MdAccountCircle} from 'react-icons/md'
 import GitIcon from 'react-ionicons/lib/LogoGithub'
+import { NavLink } from "react-router-dom";
 
 const Topnavbar = () => {
 
     return (
         <>
         
-        <FaHome fontSize="35px" /><span style={{whiteSpace: "nowrap"}}>HOME PAGE</span>
-        <GitIcon color ="black" fontSize = "35px"/><span style={{whiteSpace: "nowrap"}}>dd</span>
-        <FaReact fontSize ="40px" /><span style={{whiteSpace: "nowrap"}}>dd</span>
-        <FaEnvelopeOpenText fontSize = "40px" /><span style={{whiteSpace: "nowrap"}}>dd</span>
-       
+        <Navbar bg="light" expand="lg">
+        <Nav className="mr-auto">
+            {/*Navbar in here */}
+
+        <Navbar.Link href ="#/HomePage">
+            <FaHome fontSize="35px" /><span style={{whiteSpace: "nowrap"}}>HOME PAGE</span>
+        </Navbar.Link>
+
+        <Navbar.Link href="#/Auth">
+            <MdAccountCircle fontSize="50px" /><span style={{whiteSpace: "nowrap"}}>Account</span>
+        </Navbar.Link>
+
+            </Nav>
+
+        </Navbar>
         </>
     )
     ;

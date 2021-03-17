@@ -1,6 +1,8 @@
 import React, {useState, useReducer} from 'react'
 import {LoginContext} from './usecontext/logincontext'
 import { HashRouter as Router, Switch, Route} from 'react-router-dom'
+import HomePage from './HomePage'
+import Auth from './Auth'
 
 import Topnavbar from './Topnavbar'
 
@@ -22,15 +24,23 @@ const App = () => {
    isLogin: false
  })
 
+ const router = (<Router>
+ <Switch>
+   <Route path={"/HomePage"} 
+  component={HomePage} exact />
+
+  <Route path={"/Auth"}
+   render={() => <Auth loginState={loginState} setLoginDispatch={setLoginDispatch} />} exact /> 
+
+
+</Switch>
+
+</Router>)
+
   return (
     <LoginContext.Provider value ={{loginState, setLoginDispatch}}>
-
-       <Topnavbar />
-      <h1>{loginState.isLogin ? <>You are not logged in, click to login</> : <>You are logged in, click to log out</>}</h1>
-      <button onClick={()=>setLoginDispatch({type:'login', isLogin: true})}>Click to login</button>
-      <button onClick={()=>setLoginDispatch({type:'login', isLogin: false})}>Click to log out</button>
-
-
+      <Topnavbar />
+      {router}
     </LoginContext.Provider>
   );
 }
