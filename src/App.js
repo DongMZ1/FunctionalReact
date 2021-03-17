@@ -24,8 +24,9 @@ const App = () => {
 
   return (
     <LoginContext.Provider value ={{loginState, setLoginDispatch}}>
+
        <Topnavbar />
-      <h1>{loginState.isLogin ? <>U are not login, click to login</> : <>U are logined, click to login out</>}</h1>
+      <h1>{loginState.isLogin ? <>You are not logged in, click to login</> : <>You are logged in, click to log out</>}</h1>
       <button onClick={()=>setLoginDispatch({type:'login', isLogin: true})}>Click to login</button>
       <button onClick={()=>setLoginDispatch({type:'login', isLogin: false})}>Click to log out</button>
 
