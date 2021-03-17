@@ -15,7 +15,7 @@ const Topnavbar = () => {
         <Nav className="mr-auto">
             {/*Navbar in here */}
 
-        <Navbar.Link href ="#/HomePage">
+        <Navbar.Link href ="#/">
             <FaHome fontSize="35px" /><span style={{whiteSpace: "nowrap"}}>HOME PAGE</span>
         </Navbar.Link>
 

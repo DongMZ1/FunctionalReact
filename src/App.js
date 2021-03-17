@@ -26,8 +26,8 @@ const App = () => {
 
  const router = (<Router>
  <Switch>
-   <Route path={"/HomePage"} 
-  component={HomePage} exact />
+   <Route path={"/"} 
+  render={() => <HomePage loginState={loginState} setLoginDispatch={setLoginDispatch} />} exact />
 
   <Route path={"/Auth"}
    render={() => <Auth loginState={loginState} setLoginDispatch={setLoginDispatch} />} exact /> 
