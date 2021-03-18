@@ -1,4 +1,4 @@
-import React, {useReducer, useCallback} from 'react'
+import React, {useState, useReducer, useCallback} from 'react'
 
 function formreducer(state, action){
     switch(action.type){
@@ -13,13 +13,25 @@ function formreducer(state, action){
     }
    
 }
-const useForm = ({initialState}) =>{
+const useForm = ({initialState, validator}) =>{
     const[formdata, formstatedispatch] = useReducer(formreducer, initialState)
+    const[error, seterror] = useState(null)
 
-    const handleinputchange = event =>{
-        
-    }
-    return {formdata, formstatedispatch}
+    const handleinputchange = useCallback(
+        (event) => {
+            const{name, value} = event.target;
+            formstatedispatch(
+                {
+                    type : 'addcontent',
+                    fieldname: name,
+                    value: payload,
+                }
+            )
+        },
+        [],
+    )
+
+    return {formdata, formstatedispatch, handleinputchange}
       
 }
 

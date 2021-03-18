@@ -7,11 +7,15 @@ const Auth = ({loginState, setLoginDispatch}) => {
 
     }
 
-    let page;
+    const handlesignup = () =>{
+      setLoginOrSignup(true);
+    }
+
+    let beforelogin = null;
     {/*if not login, then login page or sign up page, else display the account imformation and sign out button*/}
     if(!loginState.isLogin){
         if(LoginOrSignup){
-        page = 
+        beforelogin = 
         <>
         <br />
         <br />
@@ -29,26 +33,53 @@ const Auth = ({loginState, setLoginDispatch}) => {
     <Form.Control type="password" name="password" placeholder="Password" />
   </Form.Group>
   
-  <Button style={{padding : "10px"}} variant="primary" type="submit" onClick={handlelogin}>
-    Submit
+  <Button style={{marginLeft : "5%px"}} variant="primary" type="submit" onClick={handlelogin}>
+    SIGN IN
   </Button>
 
-  <Button style={{padding : "10px"}} variant="primary">
+  <Button style={{marginLeft:"5%"}} variant="primary" onClick={() => setLoginOrSignup(false)}>
     Do not have an account? Click to create one!
   </Button>
 </Form>
      </>
-        }
-    }else{
-        page = <>
-        
-        </>
+        }else{
+        {/*sign up page */}
+          beforelogin = <>
+          <Form style={{paddingLeft:"20%", paddingRight:"50%"}}>
+
+
+  <Form.Group controlId="formBasicEmail">
+    <Form.Label>Email address</Form.Label>
+    <Form.Control type="email" name="emailsignup" placeholder="Enter email" />
+  </Form.Group>
+
+  <Form.Group controlId="formBasicPassword">
+    <Form.Label>Password</Form.Label>
+    <Form.Control type="password" name="passwordsignup" placeholder="Password" />
+  </Form.Group>
+
+  <Form.Group controlId="formBasicPassword">
+    <Form.Label>Please enter the same password for validation </Form.Label>
+    <Form.Control type="password" name="passwordsignup" placeholder="Password" />
+  </Form.Group>
+  
+  <Button style={{marginLeft : "5%px"}} variant="primary" type="submit" onClick={handlesignup}>
+    SIGN UP
+  </Button>
+
+  <Button style={{marginLeft:"5%"}} variant="primary" onClick={() => setLoginOrSignup(true)}>
+    Already have an account? Click to sign in!
+  </Button>
+</Form>
+          </>
+      }
     }
+
 
     
       return(
           <>
-          {page}
+          {beforelogin}
           </>
       )
 

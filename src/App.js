@@ -26,11 +26,13 @@ const App = () => {
 
  const router = (<Router>
  <Switch>
-   <Route path={"/"} 
-  render={() => <HomePage loginState={loginState} setLoginDispatch={setLoginDispatch} />} exact />
+   <Route path={"/"} exact>
+   <HomePage loginState={loginState} setLoginDispatch={setLoginDispatch} />
+   </Route>
 
-  <Route path={"/Auth"}
-   render={() => <Auth loginState={loginState} setLoginDispatch={setLoginDispatch} />} exact /> 
+  <Route path={"/Auth"} exact>
+  <Auth loginState={loginState} setLoginDispatch={setLoginDispatch} />
+  </Route> 
 
 
 </Switch>
