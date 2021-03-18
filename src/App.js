@@ -15,6 +15,11 @@ function loginReducer(state, action){
         ...state,
         isLogin: action.isLogin
       }
+    case 'getUser' :
+      return{
+         ...state,
+         user: action.user
+      }
   }
 
 }

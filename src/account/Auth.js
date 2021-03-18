@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {Form, Button} from 'react-bootstrap'
 import useForm from '../costumhooks/useForm'
+import AfterLogin from './AfterLogin'
 
 const Auth = ({loginState, setLoginDispatch}) => {
     const {formdatasignup, formstatesignupdispatch, handlesignupinputchange} = useForm({}, {})
@@ -84,7 +85,7 @@ const Auth = ({loginState, setLoginDispatch}) => {
       return(
           <>
           {!loginState.isLogin && authpage}
-
+          {loginState.isLogin && <AfterLogin />}
 
           </>
       )
