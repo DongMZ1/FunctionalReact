@@ -3,6 +3,7 @@ import {Form, Button} from 'react-bootstrap'
 import useForm from '../costumhooks/useForm'
 
 const Auth = ({loginState, setLoginDispatch}) => {
+    const {formdatasignup, formstatesignupdispatch, handlesignupinputchange} = useForm({}, {})
     const [LoginOrSignup, setLoginOrSignup] = useState(true)
     const handlelogin =()=>{
       setLoginDispatch({type: 'login', isLogin: true });
@@ -46,6 +47,8 @@ const Auth = ({loginState, setLoginDispatch}) => {
         }else{
         {/*sign up page */}
           authpage = <>
+          <br />
+          <br />
           <Form style={{paddingLeft:"20%", paddingRight:"40%"}}>
 
 
@@ -74,15 +77,15 @@ const Auth = ({loginState, setLoginDispatch}) => {
 </Form>
           </>
       }
-    }else{
-         
     }
 
 
     
       return(
           <>
-          {authpage}
+          {!loginState.isLogin && authpage}
+
+
           </>
       )
 
