@@ -2,7 +2,7 @@ import React, {useState, useReducer} from 'react'
 import {LoginContext} from './usecontext/logincontext'
 import { HashRouter as Router, Switch, Route} from 'react-router-dom'
 import HomePage from './HomePage'
-import Auth from './Auth'
+import Auth from './account/Auth'
 
 import Topnavbar from './Topnavbar'
 
