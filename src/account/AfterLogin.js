@@ -4,7 +4,7 @@ const AfterLogin = () =>{
     const {loginState, setLoginDispatch} = useContext(LoginContext)
   return(
    <>
-     {String(loginState.isLogin)}
+     <h1>Welcome back</h1>
    </>
   );
 }

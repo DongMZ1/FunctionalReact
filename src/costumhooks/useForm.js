@@ -13,7 +13,7 @@ function formreducer(state, action){
     }
    
 }
-const useForm = (initialState, validator) =>{
+const useForm = ({initialState, validator}) =>{
     const[formdata, formstatedispatch] = useReducer(formreducer, initialState)
     const[error, seterror] = useState(null)
 

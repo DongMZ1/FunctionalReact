@@ -4,7 +4,7 @@ import useForm from '../costumhooks/useForm'
 import AfterLogin from './AfterLogin'
 
 const Auth = ({loginState, setLoginDispatch}) => {
-    const {formdatasignup, formstatesignupdispatch, handlesignupinputchange} = useForm({}, {})
+    const {formdatasignup, formstatesignupdispatch, handlesignupinputchange} = useForm({initialState: null, validator: null})
     const [LoginOrSignup, setLoginOrSignup] = useState(true)
     const handlelogin =()=>{
       setLoginDispatch({type: 'login', isLogin: true });
