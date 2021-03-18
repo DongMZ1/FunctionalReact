@@ -19,12 +19,13 @@ const useForm = ({initialState, validator}) =>{
 
     const handleinputchange = useCallback(
         (event) => {
+            event.preventdefault();
             const{name, value} = event.target;
             formstatedispatch(
                 {
                     type : 'addcontent',
                     fieldname: name,
-                    value: payload,
+                    payload: value,
                 }
             )
         },

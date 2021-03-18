@@ -1,25 +1,26 @@
 import React, {useState} from 'react'
 import {Form, Button} from 'react-bootstrap'
+import useForm from '../costumhooks/useForm'
 
 const Auth = ({loginState, setLoginDispatch}) => {
     const [LoginOrSignup, setLoginOrSignup] = useState(true)
     const handlelogin =()=>{
-
+      setLoginDispatch({type: 'login', isLogin: true });
     }
 
     const handlesignup = () =>{
       setLoginOrSignup(true);
     }
 
-    let beforelogin = null;
+    let authpage = null;
     {/*if not login, then login page or sign up page, else display the account imformation and sign out button*/}
     if(!loginState.isLogin){
         if(LoginOrSignup){
-        beforelogin = 
+        authpage = 
         <>
         <br />
         <br />
-        <Form style={{paddingLeft:"20%", paddingRight:"50%"}}>
+        <Form style={{paddingLeft:"20%", paddingRight:"40%"}}>
   <Form.Group controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
     <Form.Control type="email" name="email" placeholder="Enter email" />
@@ -44,8 +45,8 @@ const Auth = ({loginState, setLoginDispatch}) => {
      </>
         }else{
         {/*sign up page */}
-          beforelogin = <>
-          <Form style={{paddingLeft:"20%", paddingRight:"50%"}}>
+          authpage = <>
+          <Form style={{paddingLeft:"20%", paddingRight:"40%"}}>
 
 
   <Form.Group controlId="formBasicEmail">
@@ -73,13 +74,15 @@ const Auth = ({loginState, setLoginDispatch}) => {
 </Form>
           </>
       }
+    }else{
+         
     }
 
 
     
       return(
           <>
-          {beforelogin}
+          {authpage}
           </>
       )
 
