@@ -3,9 +3,10 @@ import {Form, Button} from 'react-bootstrap'
 import useForm from '../costumhooks/useForm'
 import AfterLogin from './AfterLogin'
 import {Loginvalidator} from '../Validator/formvalidator'
+import {useHistory} from 'react-router-dom'
 
 const Auth = ({loginState, setLoginDispatch}) => {
-
+    const history = useHistory('/Auth')
     const [signupformdata, signupformstatedispatch, signuphandleinputchange] = useForm({email: '', password : ''})
     const handlesignup = () =>{
       setLoginDispatch({type: 'LoginOrSignup', LoginOrSignup: true});
@@ -23,6 +24,7 @@ const Auth = ({loginState, setLoginDispatch}) => {
           password: loginformdata.password
         })
         setLoginDispatch({type: 'login', isLogin: true});
+        history.push('/Auth');
       }
     }
     
