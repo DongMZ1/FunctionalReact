@@ -1,38 +1,42 @@
 import React, {useState, useReducer, useCallback} from 'react'
+import {SignUpLoginvalidator} from '../Validator/formvalidator'
 
 function formreducer(state, action){
     switch(action.type){
 
-        case 'addcontent':
+        case 'email':
             return{
              ...state,
-             [action.fieldname] : action.payload
+             email : action.payload
+        }
+
+        case 'password':
+            return{
+             ...state,
+             password : action.payload
         }
 
  
     }
    
 }
-const useForm = ({initialState, validator}) =>{
+const useForm = (initialState) =>{
     const[formdata, formstatedispatch] = useReducer(formreducer, initialState)
-    const[error, seterror] = useState(null)
+    
 
     const handleinputchange = useCallback(
         (event) => {
-            event.preventdefault();
-            const{name, value} = event.target;
             formstatedispatch(
                 {
-                    type : 'addcontent',
-                    fieldname: name,
-                    payload: value,
+                    type: event.target.name,
+                    payload: event.target.value,
                 }
             )
         },
         [],
     )
 
-    return {formdata, formstatedispatch, handleinputchange}
+    return [formdata, formstatedispatch, handleinputchange]
       
 }
 

@@ -2,38 +2,51 @@ import React, {useState} from 'react'
 import {Form, Button} from 'react-bootstrap'
 import useForm from '../costumhooks/useForm'
 import AfterLogin from './AfterLogin'
+import {Loginvalidator} from '../Validator/formvalidator'
 
 const Auth = ({loginState, setLoginDispatch}) => {
-    const {formdatasignup, formstatesignupdispatch, handlesignupinputchange} = useForm({initialState: null, validator: null})
-    const [LoginOrSignup, setLoginOrSignup] = useState(true)
-    const handlelogin =()=>{
-      setLoginDispatch({type: 'login', isLogin: true });
-    }
 
+    const [signupformdata, signupformstatedispatch, signuphandleinputchange] = useForm({email: '', password : ''})
     const handlesignup = () =>{
       setLoginOrSignup(true);
     }
 
-    let authpage = null;
-    {/*if not login, then login page or sign up page, else display the account imformation and sign out button*/}
-    if(!loginState.isLogin){
-        if(LoginOrSignup){
-        authpage = 
+
+    const [loginformdata, loginformstatedispatch, loginhandleinputchange] = useForm({email: '', password : ''})
+    /*check if it is in the login page or sign up page, login page return true, sign up page return false*/
+    const [LoginOrSignup, setLoginOrSignup] = useState(true)
+    const [loginerror, loginisvalid] = Loginvalidator(loginformdata)
+    const handlelogin =()=>{
+      if(loginisvalid){
+        setLoginDispatch({
+          type: 'user',
+          email: loginformdata.email,
+          password: loginformdata.password
+        })
+      setLoginDispatch({type: 'login', isLogin: true });
+      }
+    }
+    
+    
+    const loginpage = (!loginState.isLogin &&
         <>
         <br />
         <br />
         <Form style={{paddingLeft:"20%", paddingRight:"40%"}}>
   <Form.Group controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
-    <Form.Control type="email" name="email" placeholder="Enter email" />
+    <Form.Control type="email" name="email" placeholder="Enter email" onChange={loginhandleinputchange} />
     <Form.Text className="text-muted">
-      We'll never share your email with anyone else.
+      {!loginisvalid && loginerror.email}
     </Form.Text>
   </Form.Group>
 
   <Form.Group controlId="formBasicPassword">
     <Form.Label>Password</Form.Label>
-    <Form.Control type="password" name="password" placeholder="Password" />
+    <Form.Control type="password" name="password" placeholder="Password" onChange={loginhandleinputchange} />
+    <Form.Text className="text-muted">
+      {!loginisvalid && loginerror.password}
+    </Form.Text>
   </Form.Group>
   
   <Button style={{marginLeft : "5%px"}} variant="primary" type="submit" onClick={handlelogin}>
@@ -45,9 +58,11 @@ const Auth = ({loginState, setLoginDispatch}) => {
   </Button>
 </Form>
      </>
-        }else{
+    )
+       
         {/*sign up page */}
-          authpage = <>
+
+          const signuppage =( !loginState.isLogin && <>
           <br />
           <br />
           <Form style={{paddingLeft:"20%", paddingRight:"40%"}}>
@@ -77,14 +92,16 @@ const Auth = ({loginState, setLoginDispatch}) => {
   </Button>
 </Form>
           </>
-      }
-    }
+          )
+
 
 
     
       return(
           <>
-          {!loginState.isLogin && authpage}
+          {LoginOrSignup && loginpage}
+          {!LoginOrSignup && signuppage}
+          
           {loginState.isLogin && <AfterLogin />}
 
           </>

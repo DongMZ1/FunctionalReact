@@ -15,11 +15,17 @@ function loginReducer(state, action){
         ...state,
         isLogin: action.isLogin
       }
-    case 'getUser' :
+    case 'user' :
       return{
          ...state,
-         user: action.user
+         email: action.email,
+         password: action.password
       }
+     case 'token' :
+       return{
+         ...state,
+         token: action.payload
+       } 
   }
 
 }
