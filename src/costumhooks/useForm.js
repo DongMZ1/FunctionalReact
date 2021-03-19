@@ -1,5 +1,4 @@
 import React, {useState, useReducer, useCallback} from 'react'
-import {SignUpLoginvalidator} from '../Validator/formvalidator'
 
 function formreducer(state, action){
     switch(action.type){

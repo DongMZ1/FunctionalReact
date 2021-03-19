@@ -8,13 +8,12 @@ const Auth = ({loginState, setLoginDispatch}) => {
 
     const [signupformdata, signupformstatedispatch, signuphandleinputchange] = useForm({email: '', password : ''})
     const handlesignup = () =>{
-      setLoginOrSignup(true);
+      setLoginDispatch({type: 'LoginOrSignup', LoginOrSignup: true});
     }
 
 
     const [loginformdata, loginformstatedispatch, loginhandleinputchange] = useForm({email: '', password : ''})
     /*check if it is in the login page or sign up page, login page return true, sign up page return false*/
-    const [LoginOrSignup, setLoginOrSignup] = useState(true)
     const [loginerror, loginisvalid] = Loginvalidator(loginformdata)
     const handlelogin =()=>{
       if(loginisvalid){
@@ -23,7 +22,7 @@ const Auth = ({loginState, setLoginDispatch}) => {
           email: loginformdata.email,
           password: loginformdata.password
         })
-      setLoginDispatch({type: 'login', isLogin: true });
+        setLoginDispatch({type: 'login', isLogin: true});
       }
     }
     
@@ -53,7 +52,7 @@ const Auth = ({loginState, setLoginDispatch}) => {
     SIGN IN
   </Button>
 
-  <Button style={{marginLeft:"5%"}} variant="primary" onClick={() => setLoginOrSignup(false)}>
+  <Button style={{marginLeft:"5%"}} variant="primary" onClick={() => setLoginDispatch({type: 'LoginOrSignup', payload: false})}>
     Do not have an account? Click to create one!
   </Button>
 </Form>
@@ -87,7 +86,7 @@ const Auth = ({loginState, setLoginDispatch}) => {
     SIGN UP
   </Button>
 
-  <Button style={{marginLeft:"5%"}} variant="primary" onClick={() => setLoginOrSignup(true)}>
+  <Button style={{marginLeft:"5%"}} variant="primary" onClick={() => setLoginDispatch({type: 'LoginOrSignup', payload: true})}>
     Already have an account? Click to sign in!
   </Button>
 </Form>
@@ -99,8 +98,8 @@ const Auth = ({loginState, setLoginDispatch}) => {
     
       return(
           <>
-          {LoginOrSignup && loginpage}
-          {!LoginOrSignup && signuppage}
+          {loginState.LoginOrSignup && loginpage}
+          {!loginState.LoginOrSignup && signuppage}
           
           {loginState.isLogin && <AfterLogin />}
 
