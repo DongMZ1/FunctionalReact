@@ -45,7 +45,7 @@ const App = () => {
    <HomePage loginState={loginState} setLoginDispatch={setLoginDispatch} />
    </Route>
 
-  <Route path={'/Auth'} exact>
+  <Route path={'/Auth/' + loginState.email} exact>
   <Auth loginState={loginState} setLoginDispatch={setLoginDispatch} />
   </Route>
   </Switch>
@@ -56,7 +56,7 @@ const App = () => {
   return (
 <Router>
     <LoginContext.Provider value ={{loginState, setLoginDispatch}}>
-      <Topnavbar loginState={loginState} />
+      <Topnavbar loginState={loginState} setLoginDispatch={setLoginDispatch} />
       {router}
     </LoginContext.Provider>
     </Router>

@@ -15,6 +15,12 @@ function formreducer(state, action){
              password : action.payload
         }
 
+        case 'passwordrepeat':
+            return{
+                ...state,
+                passwordrepeat: action.payload
+            }
+
  
     }
    

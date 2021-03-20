@@ -5,7 +5,7 @@ import {MdAccountCircle} from 'react-icons/md'
 import { NavLink } from "react-router-dom";
 import { LinkContainer} from 'react-router-bootstrap';
 import {Link} from 'react-router-dom'
-const Topnavbar = ({loginState}) => {
+const Topnavbar = ({loginState, setLoginDispatch}) => {
 
     return (
         <>
@@ -22,15 +22,23 @@ const Topnavbar = ({loginState}) => {
             </Nav.Link>
             </LinkContainer>
 
-            <LinkContainer to={'/Auth'}>
+            <LinkContainer to={'/Auth/' + loginState.email}>
         <Nav.Link>
             <MdAccountCircle fontSize="50px" /><span style={{whiteSpace: "nowrap"}}>Account</span>
             </Nav.Link>
             </LinkContainer>
+
+            
             </Navbar.Collapse>
 
 
+
             </Nav>
+            {loginState.isLogin &&
+            <Nav.Link style={{float: "right"}}>
+            <MdAccountCircle fontSize="50px" /><span style={{whiteSpace: "nowrap"}}>log out</span>
+            </Nav.Link>
+            } 
 
         </Navbar>
         </>

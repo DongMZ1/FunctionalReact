@@ -2,24 +2,28 @@ import React, {useState} from 'react'
 import {Form, Button} from 'react-bootstrap'
 import useForm from '../costumhooks/useForm'
 import AfterLogin from './AfterLogin'
-import {Loginvalidator} from '../Validator/formvalidator'
+import {Loginvalidator, Signupvalidator} from '../Validator/formvalidator'
 import {useHistory} from 'react-router-dom'
 
 const Auth = ({loginState, setLoginDispatch}) => {
-    const history = useHistory('/Auth')
+    const history = useHistory();
     const [signupformdata, signupformstatedispatch, signuphandleinputchange] = useForm({email: '', password : ''})
+    const [signuperror, signupisvalid] = Signupvalidator(signupformdata)
 
     const handlesignup = () =>{
       setLoginOrSignup(true);
     }
 
+
+
     const [LoginOrSignup, setLoginOrSignup] = useState(true);
     const [loginformdata, loginformstatedispatch, loginhandleinputchange] = useForm({email: '', password : ''})
-    
+
     /*check if it is in the login page or sign up page, login page return true, sign up page return false*/
     const [loginerror, loginisvalid] = Loginvalidator(loginformdata)
-
-    const handlelogin =()=>{
+    
+    
+    const handlelogin = async () =>{
       if(loginisvalid){
         setLoginDispatch({
           type: 'user',
@@ -30,6 +34,7 @@ const Auth = ({loginState, setLoginDispatch}) => {
           type: 'login',
           isLogin: true
         })
+        history.push('/Auth/' + (loginformdata.email))
       }
     }
     
@@ -66,6 +71,11 @@ const Auth = ({loginState, setLoginDispatch}) => {
      </>
     )
        
+
+
+
+
+
         {/*sign up page */}
 
           const signuppage =( !loginState.isLogin && <>
@@ -76,17 +86,26 @@ const Auth = ({loginState, setLoginDispatch}) => {
 
   <Form.Group controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
-    <Form.Control type="email" name="emailsignup" placeholder="Enter email" />
+    <Form.Control type="email" name="email" placeholder="Enter email" onChange={signuphandleinputchange} />
+    <Form.Text className="text-muted">
+      {!signupisvalid && signuperror.email}
+    </Form.Text>
   </Form.Group>
 
   <Form.Group controlId="formBasicPassword">
     <Form.Label>Password</Form.Label>
-    <Form.Control type="password" name="passwordsignup" placeholder="Password" />
+    <Form.Control type="password" name="password" placeholder="Password" onChange={signuphandleinputchange} />
+    <Form.Text className="text-muted">
+      {!signupisvalid && signuperror.password}
+    </Form.Text>
   </Form.Group>
 
   <Form.Group controlId="formBasicPassword">
     <Form.Label>Please enter the same password for validation </Form.Label>
-    <Form.Control type="password" name="passwordsignup" placeholder="Password" />
+    <Form.Control type="password" name="passwordrepeat" placeholder="Password" onChange={signuphandleinputchange} />
+    <Form.Text className="text-muted">
+      {!signupisvalid && signuperror.password}
+    </Form.Text>
   </Form.Group>
   
   <Button style={{marginLeft : "5%px"}} variant="primary" type="submit" onClick={handlesignup}>
