@@ -5,8 +5,24 @@ import {MdAccountCircle} from 'react-icons/md'
 import { NavLink } from "react-router-dom";
 import { LinkContainer} from 'react-router-bootstrap';
 import {Link} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 const Topnavbar = ({loginState, setLoginDispatch}) => {
+    const history = useHistory();
+    const handlelogout = () =>{
+        setLoginDispatch({
+            type: 'user',
+            email: null,
+            password: null
+        })
 
+        setLoginDispatch(
+            {
+                type: 'login',
+                isLogin: false
+            }
+        )
+        history.push('/')
+    }
     return (
         <>
         
@@ -35,7 +51,7 @@ const Topnavbar = ({loginState, setLoginDispatch}) => {
 
             </Nav>
             {loginState.isLogin &&
-            <Nav.Link style={{float: "right"}}>
+            <Nav.Link style={{float: "right"}} onClick={handlelogout}>
             <MdAccountCircle fontSize="50px" /><span style={{whiteSpace: "nowrap"}}>log out</span>
             </Nav.Link>
             } 

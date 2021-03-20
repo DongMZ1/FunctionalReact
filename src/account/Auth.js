@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Form, Button} from 'react-bootstrap'
 import useForm from '../costumhooks/useForm'
 import AfterLogin from './AfterLogin'
-import {Loginvalidator, Signupvalidator} from '../Validator/formvalidator'
+import {Loginvalidator, Signupvalidator} from '../validator/formvalidator'
 import {useHistory} from 'react-router-dom'
 
 const Auth = ({loginState, setLoginDispatch}) => {
