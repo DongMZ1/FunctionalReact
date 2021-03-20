@@ -1,6 +1,6 @@
 import React, {useState, useReducer} from 'react'
 import {LoginContext} from './usecontext/logincontext'
-import { HashRouter as Router, Switch, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, withRouter} from 'react-router-dom'
 import HomePage from './HomePage'
 import Auth from './account/Auth'
 
@@ -26,11 +26,6 @@ function loginReducer(state, action){
          ...state,
          token: action.payload
        } 
-       case 'LoginOrSignup' :
-         return{
-           ...state,
-           LoginOrSignup: action.payload
-         }
 
        
   }
@@ -43,26 +38,29 @@ const App = () => {
    LoginOrSignup: true
  })
 
- const router = (<Router>
- <Switch>
+ const router = (
+   
+  <Switch>
    <Route path={"/"} exact>
    <HomePage loginState={loginState} setLoginDispatch={setLoginDispatch} />
    </Route>
 
   <Route path={'/Auth'} exact>
   <Auth loginState={loginState} setLoginDispatch={setLoginDispatch} />
-  </Route> 
+  </Route>
+  </Switch>
 
 
-</Switch>
-
-</Router>)
+)
 
   return (
+<Router>
     <LoginContext.Provider value ={{loginState, setLoginDispatch}}>
       <Topnavbar loginState={loginState} />
       {router}
     </LoginContext.Provider>
+    </Router>
+
   );
 }
 

@@ -3,7 +3,8 @@ import {Navbar, Nav, NavItem} from 'react-bootstrap';
 import {FaHome, FaReact, FaEnvelopeOpenText, FaFacebook, FaInstagramSquare, FaLinkedinIn, } from "react-icons/fa";
 import {MdAccountCircle} from 'react-icons/md'
 import { NavLink } from "react-router-dom";
-import { LinkContainer } from 'react-router-bootstrap';
+import { LinkContainer} from 'react-router-bootstrap';
+import {Link} from 'react-router-dom'
 const Topnavbar = ({loginState}) => {
 
     return (
@@ -15,14 +16,17 @@ const Topnavbar = ({loginState}) => {
 
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav.Link href="#/">
+            <LinkContainer to={'/'}>
+                <Nav.Link>
             <FaHome fontSize="50px" /><span style={{whiteSpace: "nowrap"}}>HOME PAGE</span>
             </Nav.Link>
+            </LinkContainer>
 
-
-        <Nav.Link href={'#/Auth'}>
+            <LinkContainer to={'/Auth'}>
+        <Nav.Link>
             <MdAccountCircle fontSize="50px" /><span style={{whiteSpace: "nowrap"}}>Account</span>
             </Nav.Link>
+            </LinkContainer>
             </Navbar.Collapse>
 
 

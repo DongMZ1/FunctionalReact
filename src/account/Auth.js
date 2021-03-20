@@ -8,14 +8,17 @@ import {useHistory} from 'react-router-dom'
 const Auth = ({loginState, setLoginDispatch}) => {
     const history = useHistory('/Auth')
     const [signupformdata, signupformstatedispatch, signuphandleinputchange] = useForm({email: '', password : ''})
+
     const handlesignup = () =>{
-      setLoginDispatch({type: 'LoginOrSignup', LoginOrSignup: true});
+      setLoginOrSignup(true);
     }
 
-
+    const [LoginOrSignup, setLoginOrSignup] = useState(true);
     const [loginformdata, loginformstatedispatch, loginhandleinputchange] = useForm({email: '', password : ''})
+    
     /*check if it is in the login page or sign up page, login page return true, sign up page return false*/
     const [loginerror, loginisvalid] = Loginvalidator(loginformdata)
+
     const handlelogin =()=>{
       if(loginisvalid){
         setLoginDispatch({
@@ -23,8 +26,10 @@ const Auth = ({loginState, setLoginDispatch}) => {
           email: loginformdata.email,
           password: loginformdata.password
         })
-        setLoginDispatch({type: 'login', isLogin: true});
-        history.push('/Auth');
+        setLoginDispatch({
+          type: 'login',
+          isLogin: true
+        })
       }
     }
     
@@ -54,7 +59,7 @@ const Auth = ({loginState, setLoginDispatch}) => {
     SIGN IN
   </Button>
 
-  <Button style={{marginLeft:"5%"}} variant="primary" onClick={() => setLoginDispatch({type: 'LoginOrSignup', payload: false})}>
+  <Button style={{marginLeft:"5%"}} variant="primary" onClick={() => setLoginOrSignup(false)}>
     Do not have an account? Click to create one!
   </Button>
 </Form>
@@ -88,7 +93,7 @@ const Auth = ({loginState, setLoginDispatch}) => {
     SIGN UP
   </Button>
 
-  <Button style={{marginLeft:"5%"}} variant="primary" onClick={() => setLoginDispatch({type: 'LoginOrSignup', payload: true})}>
+  <Button style={{marginLeft:"5%"}} variant="primary" onClick={() => setLoginOrSignup(true)}>
     Already have an account? Click to sign in!
   </Button>
 </Form>
@@ -100,8 +105,8 @@ const Auth = ({loginState, setLoginDispatch}) => {
     
       return(
           <>
-          {loginState.LoginOrSignup && loginpage}
-          {!loginState.LoginOrSignup && signuppage}
+          {LoginOrSignup && loginpage}
+          {!LoginOrSignup && signuppage}
           
           {loginState.isLogin && <AfterLogin />}
 
