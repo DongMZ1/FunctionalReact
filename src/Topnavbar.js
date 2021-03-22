@@ -1,6 +1,7 @@
 import React from "react";
 import {Navbar, Nav, NavItem} from 'react-bootstrap';
 import {FaHome, FaReact, FaEnvelopeOpenText, FaFacebook, FaInstagramSquare, FaLinkedinIn, } from "react-icons/fa";
+import {AiOutlineLogout} from 'react-icons/ai'
 import {MdAccountCircle} from 'react-icons/md'
 import { NavLink } from "react-router-dom";
 import { LinkContainer} from 'react-router-bootstrap';
@@ -52,7 +53,7 @@ const Topnavbar = ({loginState, setLoginDispatch}) => {
             </Nav>
             {loginState.isLogin &&
             <Nav.Link style={{float: "right"}} onClick={handlelogout}>
-            <MdAccountCircle fontSize="50px" /><span style={{whiteSpace: "nowrap"}}>log out</span>
+            <AiOutlineLogout fontSize="50px" /><span style={{whiteSpace: "nowrap"}}>log out</span>
             </Nav.Link>
             } 
 

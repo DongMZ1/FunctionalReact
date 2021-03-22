@@ -11,7 +11,9 @@ const Auth = ({loginState, setLoginDispatch}) => {
     const [signuperror, signupisvalid] = Signupvalidator(signupformdata)
 
     const handlesignup = () =>{
+      if(signupisvalid){
       setLoginOrSignup(true);
+      }
     }
 
 
@@ -108,7 +110,9 @@ const Auth = ({loginState, setLoginDispatch}) => {
     </Form.Text>
   </Form.Group>
   
-  <Button style={{marginLeft : "5%px"}} variant="primary" type="submit" onClick={handlesignup}>
+  {/*if password is not matching, then disable  */}
+  
+  <Button style={{marginLeft : "5%px"}} variant="primary" type="submit" onClick={handlesignup} disabled={!signupisvalid}>
     SIGN UP
   </Button>
 
