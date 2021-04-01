@@ -20,12 +20,14 @@ function formreducer(state, action){
                 ...state,
                 passwordrepeat: action.payload
             }
+        default:
+            return {...state}
 
  
     }
    
 }
-const useForm = (initialState) =>{
+export const useForm = (initialState) =>{
     const[formdata, formstatedispatch] = useReducer(formreducer, initialState)
     
 
@@ -44,5 +46,3 @@ const useForm = (initialState) =>{
     return [formdata, formstatedispatch, handleinputchange]
       
 }
-
-export default useForm

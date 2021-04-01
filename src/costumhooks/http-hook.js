@@ -2,12 +2,12 @@ import { useState, useCallback, useRef, useEffect } from 'react';
 
 export const useHttpClient = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState();
+  const [error, setError] = useState(null);
 
 
 
   const sendRequest = useCallback(
-    async (url, method = 'GET', body = null, headers = {}) => {
+    async (url, method = 'POST', body = null, headers = {}) => {
       setIsLoading(true);
 
       try {
@@ -15,7 +15,6 @@ export const useHttpClient = () => {
           method,
           body,
           headers,
-          signal: httpAbortCtrl.signal
         });
 
         const responseData = await response.json();
@@ -23,7 +22,7 @@ export const useHttpClient = () => {
  
 
         if (!response.ok) {
-          throw new Error(responseData.message);
+          throw Error(responseData.message);
         }
 
         setIsLoading(false);
@@ -31,7 +30,6 @@ export const useHttpClient = () => {
       } catch (err) {
         setError(err.message);
         setIsLoading(false);
-        throw err;
       }
     },
     []
@@ -42,5 +40,5 @@ export const useHttpClient = () => {
   };
 
 
-  return [ isLoading, error, sendRequest, clearError ];
+  return [ isLoading, error, setError, sendRequest, clearError ];
 };

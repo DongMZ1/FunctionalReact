@@ -16,7 +16,9 @@ function loginReducer(state, action){
     case 'login' :
       return{
         ...state,
-        isLogin: action.isLogin
+        isLogin: action.isLogin,
+        email: action.email,
+        token: action.token
       }
     case 'user' :
       return{
@@ -39,8 +41,9 @@ const App = () => {
  const[loginState, setLoginDispatch] = useReducer(loginReducer, {
    isLogin: false,
    LoginOrSignup: true,
-   token: localStorage.getItem('token')
+   token: null
  })
+ 
 
  const router = (
    
