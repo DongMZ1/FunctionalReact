@@ -26,7 +26,7 @@ const Auth = ({loginState, setLoginDispatch}) => {
                                      {
                                       'Content-Type': 'application/json'
                                      });
-              setTimeout(()=>{}, 6000);      
+              setTimeout(()=>{}, 10000);      
              if(httperror === null){
               setLoginDispatch({type: 'login', isLogin: true, email: responsedata.email, token: responsedata.token})
              
