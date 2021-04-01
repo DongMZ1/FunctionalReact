@@ -38,7 +38,8 @@ const App = () => {
 
  const[loginState, setLoginDispatch] = useReducer(loginReducer, {
    isLogin: false,
-   LoginOrSignup: true
+   LoginOrSignup: true,
+   token: localStorage.getItem('token')
  })
 
  const router = (
