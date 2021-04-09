@@ -1,4 +1,4 @@
-import React, {useState, useReducer} from 'react'
+import React, {useState, useReducer, useEffect} from 'react'
 import {LoginContext} from './usecontext/logincontext'
 import { BrowserRouter as Router, Switch, Route, withRouter} from 'react-router-dom'
 
@@ -38,12 +38,14 @@ function loginReducer(state, action){
 }
 const App = () => {
 
+
+
  const[loginState, setLoginDispatch] = useReducer(loginReducer, {
    isLogin: false,
    LoginOrSignup: true,
    token: null
  })
- 
+  
 
  const router = (
    
@@ -53,7 +55,7 @@ const App = () => {
    </Route>
 
   <Route path={'/Auth/' + loginState.email} exact>
-  <Auth loginState={loginState} setLoginDispatch={setLoginDispatch} />
+  <Auth />
   </Route>
 
   <Route path='/*' exact>
@@ -62,6 +64,14 @@ const App = () => {
   </Switch>
 
 
+)
+
+/*similar to redux-logger, printout my 'store' everytime if my store updated */
+
+useEffect(
+  ()=>{
+   console.log(JSON.stringify(loginState));
+  },[loginState]
 )
 
   return (

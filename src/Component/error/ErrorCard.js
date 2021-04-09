@@ -1,15 +1,23 @@
 import React from 'react';
 import { createPortal, useState } from "react-dom";
-import {Card} from 'react-bootstrap'
+import {Modal, Button} from 'react-bootstrap'
 
-const ErrorCard = ({message}) =>{
+const ErrorCard = ({message, show, setshow}) =>{
 
    return createPortal(
        <>
        {
-        <Card>
-  <Card.Body>{message}.</Card.Body>
-        </Card>
+        <Modal show={show}>
+        <Modal.Header closeButton>
+          <Modal.Title>There is an ERROR!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{message}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={()=>setshow(show => !show)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
        }
        </>, document.getElementById('ErrorCard')
         

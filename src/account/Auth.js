@@ -1,41 +1,55 @@
-import React, {useState, useRef, useCallback} from 'react'
+import React, {useState, useRef, useCallback, useContext} from 'react'
 import {Form, Button} from 'react-bootstrap'
 import {useForm} from '../costumhooks/useForm'
-import {useHttpClient} from '../costumhooks/http-hook'
 import AfterLogin from './AfterLogin'
 import {Loginvalidator, Signupvalidator} from '../validator/formvalidator'
 import {useHistory} from 'react-router-dom'
 import ErrorCard from '../Component/error/ErrorCard'
+import axios from 'axios'
+import {LoginContext} from '../usecontext/logincontext'
 
-const Auth = ({loginState, setLoginDispatch}) => {
+const Auth = () => {
+    const {loginState, setLoginDispatch} = useContext(LoginContext)
+    /*error handling */
     const [showerrorcard, setshowerrorcard] = useState(false);
-    const history = useHistory();
-    const [signupformdata, signupformstatedispatch, signuphandleinputchange] = useForm({email: '', password : ''})
-    const [signuperror, signupisvalid] = Signupvalidator(signupformdata)
-   
+    const [errorcardmessage, seterrorcardmessage] = useState('');
 
-    const [ httpisLoading, httperror, httpsetError, httpsendRequest, httpclearError] = useHttpClient();
-    const handlesignup =
-      async () =>{
-        /*if signup is valid, which is in the sign up page, then signup */
-        if(signupisvalid){
-             const responsedata = await
-              httpsendRequest('http://localhost:5000/user/signup',
-                                    'POST',
-                                     JSON.stringify(signupformdata),
-                                     {
-                                      'Content-Type': 'application/json'
-                                     });
-              setTimeout(()=>{}, 10000);      
-             if(httperror === null){
-              setLoginDispatch({type: 'login', isLogin: true, email: responsedata.email, token: responsedata.token})
-             
-             }else{ setshowerrorcard(true);}
-              
-                                              
-        
-          }
+    const history = useHistory();
+
+    /*signup form data and signup validator */
+    const [signupformdata, signupformstatedispatch, signuphandleinputchange] = useForm({email: '', password : ''})
+    const [signupformdataerror, signupformdataisvalid] = Signupvalidator(signupformdata)
+   
+  
+    const handlesignup = async (event) =>{
+         event.preventDefault();
+        const response = await fetch(
+           'http://localhost:5000/user/signup', 
+           {method: 'POST', body: JSON.stringify(signupformdata), 
+           headers: {'Content-Type': 'application/json;charset=utf-8'}}
+          )
+          const responseData = await response.json();
+   
+          if(response.ok) {
+          setLoginDispatch({
+             type: 'login',
+             email: signupformdata.email,
+             token: responseData.token,
+             isLogin: true
+           })
+           history.push('/')
+         }
+   
+         if(!response.ok){
+           seterrorcardmessage(responseData.message);
+           setshowerrorcard(true);
+         }
         }
+    
+
+          
+        
+  
        
      
 
@@ -47,24 +61,40 @@ const Auth = ({loginState, setLoginDispatch}) => {
     const [loginerror, loginisvalid] = Loginvalidator(loginformdata)
     
     
-    const handlelogin = async () =>{
-      if(loginisvalid){
+    const handlelogin =
+     async (event) =>{
+      event.preventDefault();
+     const response = await fetch(
+        'http://localhost:5000/user/login', 
+        {method: 'POST', body: JSON.stringify(loginformdata), 
+        headers: {'Content-Type': 'application/json;charset=utf-8'}}
+       )
+       const responseData = await response.json();
+
+       if(response.ok) {
        setLoginDispatch({
           type: 'login',
           email: loginformdata.email,
-          token: null,
+          token: responseData.token,
           isLogin: true
         })
-        history.push('/Auth/' + loginformdata.email)
+        history.push('/')
       }
+
+      if(!response.ok){
+        seterrorcardmessage(responseData.message);
+        setshowerrorcard(true);
+      }
+      
     }
     
+    /*Login page */
     
-    const loginpage = (!loginState.isLogin &&
+    let loginpage = 
         <>
         <br />
         <br />
-        <Form style={{paddingLeft:"20%", paddingRight:"40%"}}>
+        <Form style={{paddingLeft:"20%", paddingRight:"20%"}}>
   <Form.Group controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
     <Form.Control type="email" name="email" placeholder="Enter email" onChange={loginhandleinputchange} />
@@ -90,22 +120,24 @@ const Auth = ({loginState, setLoginDispatch}) => {
   </Button>
 </Form>
      </>
-    )
+
        
 
-    {/*sign up page */}
 
-    const signuppage =( !loginState.isLogin && <>
+
+    /*sign up page */
+
+    let signuppage = <>
       <br />
       <br />
-      <Form style={{paddingLeft:"20%", paddingRight:"40%"}}>
+      <Form style={{paddingLeft:"20%", paddingRight:"20%"}}>
 
 
 <Form.Group controlId="formBasicEmail">
 <Form.Label>Email address</Form.Label>
 <Form.Control type="email" name="email" placeholder="Enter email" onChange={signuphandleinputchange} />
 <Form.Text className="text-muted">
-  {!signupisvalid && signuperror.email}
+  {!signupformdataisvalid && signupformdataerror.email}
 </Form.Text>
 </Form.Group>
 
@@ -113,7 +145,7 @@ const Auth = ({loginState, setLoginDispatch}) => {
 <Form.Label>Password</Form.Label>
 <Form.Control type="password" name="password" placeholder="Password" onChange={signuphandleinputchange} />
 <Form.Text className="text-muted">
-  {!signupisvalid && signuperror.password}
+  {!signupformdataisvalid && signupformdataerror.password}
 </Form.Text>
 </Form.Group>
 
@@ -121,13 +153,13 @@ const Auth = ({loginState, setLoginDispatch}) => {
 <Form.Label>Please enter the same password for validation </Form.Label>
 <Form.Control type="password" name="passwordrepeat" placeholder="Password" onChange={signuphandleinputchange} />
 <Form.Text className="text-muted">
-  {!signupisvalid && signuperror.password}
+  {!signupformdataisvalid && signupformdataerror.password}
 </Form.Text>
 </Form.Group>
 
 {/*if password is not matching, then disable  */}
 
-<Button style={{marginLeft : "5%px"}} variant="primary" type="submit" onClick={handlesignup} disabled={!signupisvalid}>
+<Button style={{marginLeft : "5%px"}} variant="primary" type="submit" onClick={handlesignup} disabled={!signupformdataisvalid}>
 SIGN UP
 </Button>
 
@@ -136,25 +168,21 @@ Already have an account? Click to sign in!
 </Button>
 </Form>
       </>
-      )
+      
 
 
 
-    console.log(JSON.stringify(loginState))
+
+      if(!loginState.isLogin){
+        return <>
+            {LoginOrSignup && loginpage}
+            {!LoginOrSignup && signuppage}
+            <ErrorCard show={showerrorcard} message={errorcardmessage} setshow={setshowerrorcard} />
+        </>
+      }
+
       return(
-          <>
-          {LoginOrSignup && loginpage}
-          {!LoginOrSignup && signuppage}
-          {showerrorcard && <ErrorCard message={httperror} />}
-          The error is : {JSON.stringify(httperror)}
-          <br />
-          State: {JSON.stringify(loginState)}
-          {loginState.isLogin && <AfterLogin />}
-          Sign up is valid ? {JSON.stringify(signupisvalid)}
-          <br />
-          show error card is: {JSON.stringify(showerrorcard)}
-
-          </>
+          <AfterLogin />
       )
 
 }
