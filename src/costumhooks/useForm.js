@@ -3,23 +3,12 @@ import React, {useState, useReducer, useCallback} from 'react'
 function formreducer(state, action){
     switch(action.type){
 
-        case 'email':
+        case 'input':
             return{
              ...state,
-             email : action.payload
+             [action.name] : action.payload
         }
 
-        case 'password':
-            return{
-             ...state,
-             password : action.payload
-        }
-
-        case 'passwordrepeat':
-            return{
-                ...state,
-                passwordrepeat: action.payload
-            }
         default:
             return {...state}
 
@@ -35,7 +24,8 @@ export const useForm = (initialState) =>{
         (event) => {
             formstatedispatch(
                 {
-                    type: event.target.name,
+                    type: 'input',
+                    name: event.target.name,
                     payload: event.target.value,
                 }
             )
