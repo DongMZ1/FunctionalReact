@@ -1,7 +1,7 @@
 import React, {useState, useRef, useCallback, useContext} from 'react'
 import {Form, Button} from 'react-bootstrap'
 import {useForm} from '../costumhooks/useForm'
-import AfterLogin from './AfterLogin'
+import AfterLogin from './AccountAfterLogin'
 import {Loginvalidator, Signupvalidator} from '../validator/formvalidator'
 import {useHistory} from 'react-router-dom'
 import ErrorCard from '../Component/error/ErrorCard'
@@ -37,7 +37,7 @@ const Auth = () => {
              token: responseData.token,
              isLogin: true
            })
-           history.push('/')
+           history.push(`/Auth/${responseData.email}`)
          }
    
          if(!response.ok){
@@ -58,7 +58,7 @@ const Auth = () => {
     const [loginformdata, loginformstatedispatch, loginhandleinputchange] = useForm({email: '', password : ''})
 
     /*check if it is in the login page or sign up page, login page return true, sign up page return false*/
-    const [loginerror, loginisvalid] = Loginvalidator(loginformdata)
+    const [loginformdataerror, loginformdataisvalid] = Loginvalidator(loginformdata)
     
     
     const handlelogin =
@@ -78,7 +78,7 @@ const Auth = () => {
           token: responseData.token,
           isLogin: true
         })
-        history.push('/')
+        history.push(`/Auth/${responseData.email}`)
       }
 
       if(!response.ok){
@@ -99,7 +99,7 @@ const Auth = () => {
     <Form.Label>Email address</Form.Label>
     <Form.Control type="email" name="email" placeholder="Enter email" onChange={loginhandleinputchange} />
     <Form.Text className="text-muted">
-      {!loginisvalid && loginerror.email}
+      {!loginformdataisvalid && loginformdataerror.email}
     </Form.Text>
   </Form.Group>
 
@@ -107,11 +107,11 @@ const Auth = () => {
     <Form.Label>Password</Form.Label>
     <Form.Control type="password" name="password" placeholder="Password" onChange={loginhandleinputchange} />
     <Form.Text className="text-muted">
-      {!loginisvalid && loginerror.password}
+      {!loginformdataisvalid && loginformdataerror.password}
     </Form.Text>
   </Form.Group>
   
-  <Button style={{marginLeft : "5%px"}} variant="primary" type="submit" onClick={handlelogin}>
+  <Button style={{marginLeft : "5%px"}} variant="primary" type="submit" onClick={handlelogin} disabled={!loginformdataisvalid}>
     SIGN IN
   </Button>
 

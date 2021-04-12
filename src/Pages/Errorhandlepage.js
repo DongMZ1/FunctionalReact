@@ -18,7 +18,7 @@ const Errorhandlepage = () =>{
          <>
          <h1>ERROR</h1>
          <br />
-            <h3> URL is not Found, will redirect to HOMEPAGE in 3 seconds</h3>
+            <h3>404! URL is not Found, will redirect to HOMEPAGE in 3 seconds</h3>
             <br />
          </>
   )

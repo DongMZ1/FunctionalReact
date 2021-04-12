@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Switch, Route, withRouter} from 'react-router-
 
 
 /*Component */
-import HomePage from './HomePage'
-import Auth from './account/Auth'
+import HomePage from './Pages/HomePage'
+import Auth from './Pages/Auth'
 import Topnavbar from './Topnavbar'
-import Errorhandlepage from './Errorhandlepage'
+import Errorhandlepage from './Pages/Errorhandlepage'
 
 
 /* The state control for login/log out is using useContext hook to pass useReducer to child component*/ 
@@ -54,7 +54,7 @@ const App = () => {
    <HomePage loginState={loginState} setLoginDispatch={setLoginDispatch} />
    </Route>
 
-  <Route path={'/Auth/' + loginState.email} exact>
+  <Route path={'/Auth/*'} exact>
   <Auth />
   </Route>
 
