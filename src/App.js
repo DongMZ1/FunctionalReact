@@ -20,17 +20,21 @@ function loginReducer(state, action){
         email: action.email,
         token: action.token
       }
-    case 'user' :
+    case 'addcart' :
       return{
-         ...state,
-         email: action.email,
-         password: action.password
-      }
-     case 'token' :
-       return{
-         ...state,
-         token: action.payload
-       } 
+        ...state,
+        productcart: [...state, action.product]
+      } 
+     case 'addorder' :
+      return{
+        ...state,
+        productordering: [...state, action.product]
+      } 
+       case 'addorderhistory':
+         return{
+           ...state,
+           productfinished: [...state, action.product]
+         } 
 
        
   }
@@ -43,7 +47,10 @@ const App = () => {
  const[loginState, setLoginDispatch] = useReducer(loginReducer, {
    isLogin: false,
    LoginOrSignup: true,
-   token: null
+   token: null,
+   productcard:[],
+   productordering: [],
+   productfinished: []
  })
   
 

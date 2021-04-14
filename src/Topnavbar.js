@@ -1,7 +1,7 @@
-import React from "react";
-import {Navbar, Nav, NavItem} from 'react-bootstrap';
+import React, {useState} from "react";
+import {Navbar, Nav, NavItem, Modal, Button} from 'react-bootstrap';
 import {FaHome, FaReact, FaEnvelopeOpenText, FaFacebook, FaInstagramSquare, FaLinkedinIn, } from "react-icons/fa";
-import {AiOutlineLogout} from 'react-icons/ai'
+import {AiOutlineLogout, AiOutlineShoppingCart} from 'react-icons/ai'
 import {MdAccountCircle} from 'react-icons/md'
 import { NavLink } from "react-router-dom";
 import { LinkContainer} from 'react-router-bootstrap';
@@ -9,21 +9,32 @@ import {Link} from 'react-router-dom'
 import {useHistory} from 'react-router-dom'
 const Topnavbar = ({loginState, setLoginDispatch}) => {
     const history = useHistory();
+    const [showlogout, setshowlogout] = useState(false);
+
     const handlelogout = () =>{
         setLoginDispatch({
-            type: 'user',
+            type: 'login',
             email: null,
-            password: null
+            isLogin: false,
+            token: null
         })
-
-        setLoginDispatch(
-            {
-                type: 'login',
-                isLogin: false
-            }
-        )
+        setshowlogout(true);
         history.push('/')
     }
+
+    const showlogoutmodal =     
+    <Modal show={showlogout}>
+    <Modal.Header closeButton>
+      <Modal.Title>Successfully Log out</Modal.Title>
+    </Modal.Header>
+    <Modal.Footer>
+      <Button variant="secondary" onClick={()=>setshowlogout(showlogout => !showlogout)}>
+        Click to close
+      </Button>
+    </Modal.Footer>
+  </Modal>
+
+
     return (
         <>
         
@@ -52,12 +63,19 @@ const Topnavbar = ({loginState, setLoginDispatch}) => {
 
             </Nav>
             {loginState.isLogin &&
+            <Nav.Link style={{float: "right"}}>
+            <AiOutlineShoppingCart fontSize="50px" /><span style={{whiteSpace: "nowrap"}}>Shopping Cart</span>
+            </Nav.Link>
+            } 
+
+            {loginState.isLogin &&
             <Nav.Link style={{float: "right"}} onClick={handlelogout}>
             <AiOutlineLogout fontSize="50px" /><span style={{whiteSpace: "nowrap"}}>log out</span>
             </Nav.Link>
             } 
 
         </Navbar>
+        {showlogoutmodal}
         </>
     )
     ;
