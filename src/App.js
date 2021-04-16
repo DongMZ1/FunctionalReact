@@ -18,22 +18,25 @@ function loginReducer(state, action){
         ...state,
         isLogin: action.isLogin,
         email: action.email,
-        token: action.token
+        token: action.token,
+        productcart: action.productcart,
+        productordering: action.productordering,
+        productfinished: action.productfinished
       }
     case 'addcart' :
       return{
         ...state,
-        productcart: [...state, action.product]
+        productcart: action.products
       } 
      case 'addorder' :
       return{
         ...state,
-        productordering: [...state, action.product]
+        productordering: action.products
       } 
        case 'addorderhistory':
          return{
            ...state,
-           productfinished: [...state, action.product]
+           productfinished: action.products
          } 
 
        
