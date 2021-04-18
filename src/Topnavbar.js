@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import { LinkContainer} from 'react-router-bootstrap';
 import {Link} from 'react-router-dom'
 import {useHistory} from 'react-router-dom'
-const Topnavbar = ({loginState, setLoginDispatch}) => {
+const Topnavbar = ({loginState, setLoginDispatch, setshowshoppingcart}) => {
     const history = useHistory();
     const [showlogout, setshowlogout] = useState(false);
 
@@ -16,9 +16,13 @@ const Topnavbar = ({loginState, setLoginDispatch}) => {
             type: 'login',
             email: null,
             isLogin: false,
-            token: null
+            token: null,
+            productcart: [],
+            productordering:[],
+            productfinished: []
         })
         setshowlogout(true);
+        setTimeout(()=>{setshowlogout(false);}, 1000)
         history.push('/')
     }
 
@@ -27,11 +31,6 @@ const Topnavbar = ({loginState, setLoginDispatch}) => {
     <Modal.Header closeButton>
       <Modal.Title>Successfully Log out</Modal.Title>
     </Modal.Header>
-    <Modal.Footer>
-      <Button variant="secondary" onClick={()=>setshowlogout(showlogout => !showlogout)}>
-        Click to close
-      </Button>
-    </Modal.Footer>
   </Modal>
 
 
@@ -63,7 +62,7 @@ const Topnavbar = ({loginState, setLoginDispatch}) => {
 
             </Nav>
             {loginState.isLogin &&
-            <Nav.Link style={{float: "right"}}>
+            <Nav.Link style={{float: "right"}} onClick={() =>setshowshoppingcart(show => !show)}>
             <AiOutlineShoppingCart fontSize="50px" /><span style={{whiteSpace: "nowrap"}}>Shopping Cart</span>
             </Nav.Link>
             } 

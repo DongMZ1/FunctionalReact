@@ -35,7 +35,10 @@ const Auth = () => {
              type: 'login',
              email: signupformdata.email,
              token: responseData.token,
-             isLogin: true
+             isLogin: true,
+             productcart: [],
+             productordering: [],
+             productfinished: []
            })
            history.push(`/Auth/${responseData.email}`)
          }
@@ -76,7 +79,10 @@ const Auth = () => {
           type: 'login',
           email: loginformdata.email,
           token: responseData.token,
-          isLogin: true
+          isLogin: true,
+          productcart: responseData.productcart,
+          productordering: responseData.productordering,
+          productfinished: responseData.productfinished
         })
         history.push(`/Auth/${responseData.email}`)
       }
