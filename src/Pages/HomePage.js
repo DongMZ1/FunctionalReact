@@ -18,7 +18,7 @@ const HomePage = ({ loginState, setLoginDispatch}) => {
 
   /*fetch data when reloading */
   useEffect(async () => {
-    let response = await fetch("http://localhost:5000/product/getallproduct", {
+    let response = await fetch("/product/getallproduct", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     });
@@ -42,7 +42,7 @@ const HomePage = ({ loginState, setLoginDispatch}) => {
     <div className="col-sm-6">
       <ProductCard
         style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}
-        productimage={`http://localhost:5000/${product.url}`}
+        productimage={`/${product.url}`}
         producttitle={product.title}
         producttext={product.text}
         productprice={product.price}

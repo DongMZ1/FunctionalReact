@@ -26,7 +26,6 @@ function loginReducer(state, action) {
         email: action.email,
         token: action.token,
         productcart: action.productcart,
-        productreadytoorder: action.productreadytoorder,
         productordering: action.productordering,
         productfinished: action.productfinished,
       };
@@ -45,11 +44,6 @@ function loginReducer(state, action) {
         ...state,
         productfinished: action.products,
       };
-    case "productreadytoorder":
-      return {
-        ...state,
-        productreadytoorder: [...state, action.products],
-      };
   }
 }
 
@@ -66,7 +60,6 @@ const App = () => {
     LoginOrSignup: true,
     token: null,
     productcart: [],
-    productreadytoorder: [],
     productordering: [],
     productfinished: [],
   });
@@ -111,7 +104,7 @@ const App = () => {
     <div className="card mb-3">
     <div className="row g-0">
       <div className="col-md-2">
-        <img style={{height: '100px'}} src={`http://localhost:5000/${product.url}`} alt="..." />
+        <img style={{height: '100px'}} src={`/${product.url}`} alt="..." />
       </div>
       <div class="col-md-8">
         <div class="card-body">
@@ -124,7 +117,7 @@ const App = () => {
           <Button onClick = {
             async () =>{
               const response = await fetch(
-                "http://localhost:5000/user/removeproductfromcart",
+                "/user/removeproductfromcart",
                 {
                   method: "POST",
                   body: JSON.stringify({
@@ -145,7 +138,7 @@ const App = () => {
            <Button onClick={
             async () =>{
               const response = await fetch(
-                "http://localhost:5000/user/addproducttocart",
+                "/user/addproducttocart",
                 {
                   method: "POST",
                   body: JSON.stringify({
@@ -162,7 +155,20 @@ const App = () => {
            }>INCREASE</Button>
 
             <span style={{marginLeft:'10%'}}>
-            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
+            <input onChange={
+
+             async (e) => {
+                   let response = await fetch('/user/selectitemonchange', {
+                     method: 'POST',
+                     body: JSON.stringify({email: loginState.email, title: product.title, checked: e.target.checked}),
+                     headers: { "Content-Type": "application/json;charset=utf-8" },
+                   });
+                   let responseData = await response.json(); 
+                   setLoginDispatch({ type: "addcart", products: responseData.data });
+              }
+
+            }
+            className="form-check-input" type="checkbox" checked={product.checked} id="flexCheckDefault" />
             <label className="form-check-label" for="flexCheckChecked">
                   Select
             </label>

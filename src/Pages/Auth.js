@@ -24,7 +24,7 @@ const Auth = () => {
     const handlesignup = async (event) =>{
          event.preventDefault();
         const response = await fetch(
-           'http://localhost:5000/user/signup', 
+           '/user/signup', 
            {method: 'POST', body: JSON.stringify(signupformdata), 
            headers: {'Content-Type': 'application/json;charset=utf-8'}}
           )
@@ -37,7 +37,6 @@ const Auth = () => {
              token: responseData.token,
              isLogin: true,
              productcart: [],
-             productreadytoorder: [],
              productordering: [],
              productfinished: []
            })
@@ -69,7 +68,7 @@ const Auth = () => {
      async (event) =>{
       event.preventDefault();
      const response = await fetch(
-        'http://localhost:5000/user/login', 
+        '/user/login', 
         {method: 'POST', body: JSON.stringify(loginformdata), 
         headers: {'Content-Type': 'application/json;charset=utf-8'}}
        )
@@ -82,7 +81,6 @@ const Auth = () => {
           token: responseData.token,
           isLogin: true,
           productcart: responseData.productcart,
-          productreadytoorder: [],
           productordering: responseData.productordering,
           productfinished: responseData.productfinished
         })
