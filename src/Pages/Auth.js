@@ -37,6 +37,7 @@ const Auth = () => {
              token: responseData.token,
              isLogin: true,
              productcart: [],
+             productreadytoorder: [],
              productordering: [],
              productfinished: []
            })
@@ -81,6 +82,7 @@ const Auth = () => {
           token: responseData.token,
           isLogin: true,
           productcart: responseData.productcart,
+          productreadytoorder: [],
           productordering: responseData.productordering,
           productfinished: responseData.productfinished
         })

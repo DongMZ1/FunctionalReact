@@ -26,6 +26,7 @@ function loginReducer(state, action) {
         email: action.email,
         token: action.token,
         productcart: action.productcart,
+        productreadytoorder: action.productreadytoorder,
         productordering: action.productordering,
         productfinished: action.productfinished,
       };
@@ -44,6 +45,11 @@ function loginReducer(state, action) {
         ...state,
         productfinished: action.products,
       };
+    case "productreadytoorder":
+      return {
+        ...state,
+        productreadytoorder: [...state, action.products],
+      };
   }
 }
 
@@ -60,6 +66,7 @@ const App = () => {
     LoginOrSignup: true,
     token: null,
     productcart: [],
+    productreadytoorder: [],
     productordering: [],
     productfinished: [],
   });
@@ -89,9 +96,14 @@ const App = () => {
   }, [loginState]);
 
 
+
+
+
   let totalprice = loginState.productcart.map(product => {return product.price*product.number;}).reduce(
     (accu, current) => {return accu+current},0
   )
+
+
 
   let shoppingitemlist =
   <> 
@@ -107,7 +119,55 @@ const App = () => {
           <br />
           price : {product.price}
           <span style={{paddingLeft:'10%'}}> 
-          <Button>DECREASE</Button> {product.number} <Button>INCREASE</Button>
+
+
+          <Button onClick = {
+            async () =>{
+              const response = await fetch(
+                "http://localhost:5000/user/removeproductfromcart",
+                {
+                  method: "POST",
+                  body: JSON.stringify({
+                    email: loginState.email,
+                    title: product.title,
+                  }),
+                  headers: { "Content-Type": "application/json;charset=utf-8" },
+                }
+              );
+          
+              const responseData = await response.json();
+              setLoginDispatch({ type: "addcart", products: responseData.data });
+            }
+          }>DECREASE</Button>
+
+
+           {product.number} 
+           <Button onClick={
+            async () =>{
+              const response = await fetch(
+                "http://localhost:5000/user/addproducttocart",
+                {
+                  method: "POST",
+                  body: JSON.stringify({
+                    email: loginState.email,
+                    title: product.title,
+                  }),
+                  headers: { "Content-Type": "application/json;charset=utf-8" },
+                }
+              );
+          
+              const responseData = await response.json();
+              setLoginDispatch({ type: "addcart", products: responseData.data });
+            }
+           }>INCREASE</Button>
+
+            <span style={{marginLeft:'10%'}}>
+            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"></input>
+            <label className="form-check-label" for="flexCheckChecked">
+                  Select
+            </label>
+            </span>
+
           </span>
         </div>
       </div>
@@ -134,11 +194,8 @@ const App = () => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      {/*start of items in cart */}
-      
+      {/*start of items in cart */} 
      {loginState.productcart.length === 0 ? 'Shopping Cart is Empty' : shoppingitemlist} 
-
-
 {/*end of items in cart */}
 
       </Modal.Body>
@@ -147,6 +204,10 @@ const App = () => {
   </Modal.Footer>
     </Modal>
   );
+
+
+
+  
 
   return (
     <Router>
