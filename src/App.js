@@ -12,10 +12,11 @@ import { Modal, Button, Card } from "react-bootstrap";
 /*Component */
 import HomePage from "./Pages/HomePage";
 import Auth from "./Pages/Auth";
-import Topnavbar from "./Topnavbar";
+import Topnavbar from "./Component/Topnavbar";
 import Errorhandlepage from "./Pages/Errorhandlepage";
 import ProductCards from "./Component/ProductCards";
 import Checkout from './Pages/Checkout'
+import Stripe from './Pages/Stripe'
 
 /* The state control for login/log out is using useContext hook to pass useReducer to child component*/
 function loginReducer(state, action) {
@@ -72,6 +73,10 @@ const App = () => {
 
       <Route path={"/Auth/*"} exact>
         <Auth />
+      </Route>
+
+      <Route path={'/stripe/'} exact>
+        <Stripe />
       </Route>
 
       <Route path={"/Checkout/"} exact>

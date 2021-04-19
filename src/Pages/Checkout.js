@@ -45,7 +45,7 @@ const Checkout = () => {
   return (
     <div>
       {product}
-      <Button style={{ marginLeft: "5%" }}>Pay your order</Button>
+      <Link to={'/stripe/'}><Button style={{ marginLeft: "5%" }}>Pay your order</Button> </Link>
       <Link to={"/"}>
         <Button style={{ marginLeft: "5%" }}>Back to HomePage</Button>
       </Link>
