@@ -5,6 +5,7 @@ import {
   Switch,
   Route,
   withRouter,
+  Link
 } from "react-router-dom";
 import { Modal, Button, Card } from "react-bootstrap";
 
@@ -14,6 +15,7 @@ import Auth from "./Pages/Auth";
 import Topnavbar from "./Topnavbar";
 import Errorhandlepage from "./Pages/Errorhandlepage";
 import ProductCards from "./Component/ProductCards";
+import Checkout from './Pages/Checkout'
 
 /* The state control for login/log out is using useContext hook to pass useReducer to child component*/
 function loginReducer(state, action) {
@@ -72,6 +74,10 @@ const App = () => {
         <Auth />
       </Route>
 
+      <Route path={"/Checkout/"} exact>
+        <Checkout />
+      </Route>
+
       <Route path="/*" exact>
         <Errorhandlepage />
       </Route>
@@ -116,13 +122,25 @@ const App = () => {
         {/*end of items in cart */}
       </Modal.Body>
       <Modal.Footer>
-        TOTAL: {totalprice.toFixed(2)}{" "}
-        <Button
+        TOTAL: {totalprice.toFixed(2)}
+      {  totalprice < 1 ? <Button
           style={{ marginLeft: "10%", marginRight: "10%" }}
           variant="primary"
+          disabled={true}
         >
           Check Out
         </Button>
+        :
+        <Link to={'/Checkout/'}>
+        <Button
+          style={{ marginLeft: "10%", marginRight: "10%" }}
+          variant="primary"
+          onClick={()=>setshowshoppingcart(false)}
+        >
+          Check Out
+        </Button>
+        </Link>
+      }
       </Modal.Footer>
     </Modal>
   );
