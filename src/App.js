@@ -16,7 +16,6 @@ import Topnavbar from "./Component/Topnavbar";
 import Errorhandlepage from "./Pages/Errorhandlepage";
 import ProductCards from "./Component/ProductCards";
 import Checkout from './Pages/Checkout'
-import Stripe from './Pages/Stripe'
 
 /* The state control for login/log out is using useContext hook to pass useReducer to child component*/
 function loginReducer(state, action) {
@@ -46,6 +45,8 @@ function loginReducer(state, action) {
         ...state,
         productfinished: action.products,
       };
+    case "localstorage":
+      return action.localstorage;  
   }
 }
 
@@ -75,10 +76,6 @@ const App = () => {
         <Auth />
       </Route>
 
-      <Route path={'/stripe/'} exact>
-        <Stripe />
-      </Route>
-
       <Route path={"/Checkout/"} exact>
         <Checkout />
       </Route>
@@ -91,18 +88,22 @@ const App = () => {
 
   /*similar to redux-logger, printout my 'store' everytime if my store updated */
 
-  useEffect(async () => {
+  useEffect(() => {
     console.log(JSON.stringify(loginState));
   }, [loginState]);
-
-  let totalprice = loginState.productcart
+  
+  
+  let totalprice = 0;
+  if (loginState.productcart
+    .filter((product) => product.checked === true).length > 0)
+  {totalprice = loginState.productcart
     .filter((product) => product.checked === true)
     .map((product) => {
       return product.price * product.number;
     })
     .reduce((accu, current) => {
       return accu + current;
-    }, 0);
+    }, 0);}
 
   const shoppingcart = (
     <Modal
