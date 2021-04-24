@@ -1,16 +1,12 @@
 import React, { useContext, useState } from "react";
 import { LoginContext } from "../usecontext/logincontext";
 import { Button, Modal } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory} from "react-router-dom";
 import StripeCheckout from "react-stripe-checkout";
-import ErrorCard from "../Component/error/ErrorCard";
-import {useHistory} from 'react-router-dom'
-const Checkout = () => {
+const Checkout = ({setshowerrorcard, seterrorcardmessage}) => {
   const history = useHistory();
   const { loginState, setLoginDispatch } = useContext(LoginContext);
 
-  const [showerror, setshowerror] = useState(false);
-  const [errormessage, seterrormessage] = useState("");
 
   const [showsuccess, setshowsuccess] = useState(false);
 
@@ -39,6 +35,7 @@ const Checkout = () => {
       return accu + current;
     }, 0);
 
+    /*items user selected */
   const productlist = loginState.productcart.filter(
     (product) => product.checked === true
   ).map(product => ({
@@ -47,7 +44,9 @@ const Checkout = () => {
     number: product.number
   }));
 
-  const productjsx = loginState.productcart
+  /*print out the product list for items that user selected */
+  const productjsx =
+  loginState.productcart
     .filter((product) => product.checked === true)
     .map((product) => (
       <div className="card mb-3">
@@ -75,32 +74,52 @@ const Checkout = () => {
         </div>
       </div>
     ));
-
+  
+     /*the way to submit payment information */
   const handleToken = async (token) => {
     const response = await fetch("/user/createcheckout", {
       method: "POST",
       body: JSON.stringify({
         token: token,
         email: loginState.email,
-        totalprice: totalprice.toFixed(2),
+        totalprice: (totalprice*1.15*100).toFixed(),
         productlist: productlist
       }),
-      headers: { "Content-Type": "application/json;charset=utf-8" },
+      headers: { "Content-Type": "application/json;charset=utf-8",
+      token: loginState.token
+     },
     });
     const responseData = await response.json();
+    
+    /*if token is expired, the log out give user a message */
+    if(response.status === 438){
+      seterrorcardmessage(responseData.message);
+      setshowerrorcard(true);
+      localStorage.clear();
+      setLoginDispatch({
+        type: 'login',
+        email: null,
+        isLogin: false,
+        token: null,
+        productcart: [],
+        productordering:[],
+        productfinished: []
+    })
+    history.push('/');
+ }
+ /*END of token is expired*/
+
     /*if not success, then send an error message */
     if (!response.ok) {
-      seterrormessage(responseData.message);
-      setshowerror(true);
+      seterrorcardmessage(responseData.message);
+      setshowerrorcard(true);
     }
     /*if success, tell the user, then redirect to homepage */
     if(response.ok){
       const res = await fetch('/user/getproductlist', {
         method: 'POST',
-        body: JSON.stringify({
-          email: loginState.email
-        }),
-        headers: { "Content-Type": "application/json;charset=utf-8" },
+        headers: { "Content-Type": "application/json;charset=utf-8",
+      token: loginState.token },
       })
       const resData = await res.json();
       setLoginDispatch({type: 'addcart', products: resData.productcart});
@@ -117,8 +136,8 @@ const Checkout = () => {
       <StripeCheckout
         stripeKey="pk_test_51IhmDWJmnqfDDj8MXwauIMMXW72ZmiFzlNMpxcc22Cvws6ce08QnLQlgbcyI7cgUSJxMuqjxHy3oBuMhGTuWVxAX00NxuYpL09"
         token={handleToken}
-        amount={totalprice.toFixed(2) * 100}
-        name={`Pay ${totalprice.toFixed(2)} $ for your ORDER`}
+        amount={(totalprice*1.15).toFixed(2) * 100}
+        name={`Pay ${(totalprice*1.15).toFixed(2)} $ for your ORDER`}
         billingAddress
         shippingAddress
       />
@@ -130,11 +149,7 @@ const Checkout = () => {
         *0.15) = {(totalprice * 1.15).toFixed(2)} $
       </span>
       <br />
-      <ErrorCard
-        show={showerror}
-        setshow={setshowerror}
-        message={errormessage}
-      />
+      <h5>4242 4242 4242 4242 is the correct credit card number for payment</h5>
       {showsuccessmodal}
     </div>
   );

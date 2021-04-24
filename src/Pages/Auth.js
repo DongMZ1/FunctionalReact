@@ -4,15 +4,11 @@ import {useForm} from '../costumhooks/useForm'
 import AfterLogin from './AccountAfterLogin'
 import {Loginvalidator, Signupvalidator} from '../validator/formvalidator'
 import {useHistory} from 'react-router-dom'
-import ErrorCard from '../Component/error/ErrorCard'
 import axios from 'axios'
 import {LoginContext} from '../usecontext/logincontext'
 
-const Auth = () => {
+const Auth = ({setshowerrorcard, seterrorcardmessage}) => {
     const {loginState, setLoginDispatch} = useContext(LoginContext)
-    /*error handling */
-    const [showerrorcard, setshowerrorcard] = useState(false);
-    const [errorcardmessage, seterrorcardmessage] = useState('');
 
     const history = useHistory();
 
@@ -40,7 +36,8 @@ const Auth = () => {
              productordering: [],
              productfinished: []
            })
-           history.push(`/Auth/${responseData.email}`)
+           localStorage.setItem('token', responseData.token);
+           history.push(`/Auth/${responseData.email}`);
          }
    
          if(!response.ok){
@@ -84,7 +81,8 @@ const Auth = () => {
           productordering: responseData.productordering,
           productfinished: responseData.productfinished
         })
-        history.push(`/Auth/${responseData.email}`)
+        localStorage.setItem('token', responseData.token);
+        history.push(`/Auth/${responseData.email}`);
       }
 
       if(!response.ok){
@@ -183,12 +181,11 @@ Already have an account? Click to sign in!
         return <>
             {LoginOrSignup && loginpage}
             {!LoginOrSignup && signuppage}
-            <ErrorCard show={showerrorcard} message={errorcardmessage} setshow={setshowerrorcard} />
         </>
       }
 
       return(
-          <AfterLogin />
+          <AfterLogin setshowerrorcard={setshowerrorcard} seterrorcardmessage={seterrorcardmessage} />
       )
 
 }

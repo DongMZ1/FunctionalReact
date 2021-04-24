@@ -12,6 +12,7 @@ const Topnavbar = ({loginState, setLoginDispatch, setshowshoppingcart}) => {
     const [showlogout, setshowlogout] = useState(false);
 
     const handlelogout = () =>{
+        localStorage.clear();
         setLoginDispatch({
             type: 'login',
             email: null,

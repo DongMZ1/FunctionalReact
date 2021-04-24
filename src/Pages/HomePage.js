@@ -9,7 +9,7 @@ import {
   FormControl,
 } from "react-bootstrap";
 
-const HomePage = ({ loginState, setLoginDispatch}) => {
+const HomePage = ({ loginState, setLoginDispatch, setshowerrorcard, seterrorcardmessage}) => {
   /*shopping list is an array, shoppinglistfetch is data from backend, but shioppinglist show
     is what acutally displaying on the screen.
     */
@@ -46,6 +46,8 @@ const HomePage = ({ loginState, setLoginDispatch}) => {
         producttitle={product.title}
         producttext={product.text}
         productprice={product.price}
+        setshowerrorcard={setshowerrorcard}
+        seterrorcardmessage={seterrorcardmessage}
       />
     </div>
   ));

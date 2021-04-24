@@ -16,6 +16,8 @@ const ProductCard = ({
   producttitle,
   producttext,
   productprice,
+  setshowerrorcard,
+  seterrorcardmessage
 }) => {
   const { loginState, setLoginDispatch } = useContext(LoginContext);
   const [showaddtocartmessage, setshowaddtocartmessage] = useState(false);
@@ -32,18 +34,38 @@ const ProductCard = ({
       }, 1000)
     }
     const response = await fetch(
-      "http://localhost:5000/user/addproducttocart",
+      "/user/addproducttocart",
       {
         method: "POST",
         body: JSON.stringify({
-          email: loginState.email,
           title: producttitle,
         }),
-        headers: { "Content-Type": "application/json;charset=utf-8" },
+        headers: { 
+          "Content-Type": "application/json;charset=utf-8",
+           'token': loginState.token
+      },
       }
     );
 
     const responseData = await response.json();
+    /*if token is expired, the log out give user a message */
+    if(response.status === 438){
+      seterrorcardmessage(responseData.message);
+      setshowerrorcard(true);
+      localStorage.clear();
+      setLoginDispatch({
+        type: 'login',
+        email: null,
+        isLogin: false,
+        token: null,
+        productcart: [],
+        productordering:[],
+        productfinished: []
+    })
+    history.push('/Auth/');
+    return;
+ }
+ /*END of token is expired*/
     setLoginDispatch({ type: "addcart", products: responseData.data });
     setshowaddtocartmessage(true);
     setTimeout(()=>{setshowaddtocartmessage(false);}, 1000);

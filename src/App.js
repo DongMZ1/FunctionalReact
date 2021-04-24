@@ -5,7 +5,8 @@ import {
   Switch,
   Route,
   withRouter,
-  Link
+  Link,
+  useHistory
 } from "react-router-dom";
 import { Modal, Button, Card } from "react-bootstrap";
 
@@ -16,6 +17,7 @@ import Topnavbar from "./Component/Topnavbar";
 import Errorhandlepage from "./Pages/Errorhandlepage";
 import ProductCards from "./Component/ProductCards";
 import Checkout from './Pages/Checkout'
+import ErrorCard from './Component/error/ErrorCard'
 
 /* The state control for login/log out is using useContext hook to pass useReducer to child component*/
 function loginReducer(state, action) {
@@ -53,10 +55,17 @@ function loginReducer(state, action) {
 const App = () => {
   const [showshoppingcart, setshowshoppingcart] = useState(false);
 
+  /*error handling at top level*/
+  const [showerrorcard, setshowerrorcard] = useState(false);
+  const [errorcardmessage, seterrorcardmessage] = useState('');
+  const history = useHistory();
+
+
   const [loginState, setLoginDispatch] = useReducer(loginReducer, {
     isLogin: false,
     LoginOrSignup: true,
     token: null,
+    email: null,
     productcart: [],
     productordering: [],
     productfinished: [],
@@ -68,16 +77,23 @@ const App = () => {
         <HomePage
           loginState={loginState}
           setLoginDispatch={setLoginDispatch}
-          setshowshoppingcart={setshowshoppingcart}
+          setshowerrorcard={setshowerrorcard}
+          seterrorcardmessage={seterrorcardmessage}
         />
       </Route>
 
       <Route path={"/Auth/*"} exact>
-        <Auth />
+        <Auth
+        setshowerrorcard={setshowerrorcard}
+        seterrorcardmessage={seterrorcardmessage}
+        />
       </Route>
 
       <Route path={"/Checkout/"} exact>
-        <Checkout />
+        <Checkout
+        setshowerrorcard={setshowerrorcard}
+        seterrorcardmessage={seterrorcardmessage}
+        />
       </Route>
 
       <Route path="/*" exact>
@@ -87,6 +103,54 @@ const App = () => {
   );
 
   /*similar to redux-logger, printout my 'store' everytime if my store updated */
+
+ 
+  useEffect(
+   async () =>{
+   if('token' in localStorage){
+     const token = localStorage.getItem('token');
+     const response = await fetch('/user/localstorage',
+     {
+       method: 'POST',
+       headers: {'Content-Type': 'application/json;charset=utf-8',
+       'token': token
+      }
+     }
+     )
+     const responseData = await response.json();
+
+     /*if token is expired, the log out give user a message */
+     if(response.status === 438){
+          seterrorcardmessage(responseData.message);
+          setshowerrorcard(true);
+          localStorage.clear();
+          setLoginDispatch({
+            type: 'login',
+            email: null,
+            isLogin: false,
+            token: null,
+            productcart: [],
+            productordering:[],
+            productfinished: []
+        })
+        return;
+     }
+     /*END of token is expired*/
+
+     setLoginDispatch(
+       {
+         type: 'login',
+         email: responseData.email,
+         isLogin: true,
+         token: token,
+         productcart: responseData.productcart,
+         productordering: responseData.productordering,
+         productfinished: responseData.productfinished
+       }
+     )
+   }
+    },[]
+  )
 
   useEffect(() => {
     console.log(JSON.stringify(loginState));
@@ -123,7 +187,9 @@ const App = () => {
         {loginState.productcart.length === 0 ? (
           "Shopping Cart is Empty"
         ) : (
-          <ProductCards />
+          <ProductCards setshowerrorcard={setshowerrorcard} seterrorcardmessage={seterrorcardmessage}
+          setshowshoppingcart={setshowshoppingcart}
+          />
         )}
         {/*end of items in cart */}
       </Modal.Body>
@@ -161,6 +227,7 @@ const App = () => {
         />
         {router}
         {shoppingcart}
+        <ErrorCard show={showerrorcard} message={errorcardmessage} setshow={setshowerrorcard} />
       </LoginContext.Provider>
     </Router>
   );
