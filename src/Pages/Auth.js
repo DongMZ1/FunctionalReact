@@ -20,7 +20,7 @@ const Auth = ({setshowerrorcard, seterrorcardmessage}) => {
     const handlesignup = async (event) =>{
          event.preventDefault();
         const response = await fetch(
-           'user/signup', 
+           '/user/signup', 
            {method: 'POST', body: JSON.stringify(signupformdata), 
            headers: {'Content-Type': 'application/json;charset=utf-8'}}
           )
@@ -65,7 +65,7 @@ const Auth = ({setshowerrorcard, seterrorcardmessage}) => {
      async (event) =>{
       event.preventDefault();
      const response = await fetch(
-        'user/login', 
+        '/user/login', 
         {method: 'POST', body: JSON.stringify(loginformdata), 
         headers: {'Content-Type': 'application/json;charset=utf-8'}}
        )
