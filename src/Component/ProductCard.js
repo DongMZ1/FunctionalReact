@@ -34,7 +34,7 @@ const ProductCard = ({
       }, 1000)
     }
     const response = await fetch(
-      "/user/addproducttocart",
+      "user/addproducttocart",
       {
         method: "POST",
         body: JSON.stringify({

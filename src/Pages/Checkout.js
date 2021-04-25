@@ -77,7 +77,7 @@ const Checkout = ({setshowerrorcard, seterrorcardmessage}) => {
   
      /*the way to submit payment information */
   const handleToken = async (token) => {
-    const response = await fetch("/user/createcheckout", {
+    const response = await fetch("user/createcheckout", {
       method: "POST",
       body: JSON.stringify({
         token: token,
@@ -116,7 +116,7 @@ const Checkout = ({setshowerrorcard, seterrorcardmessage}) => {
     }
     /*if success, tell the user, then redirect to homepage */
     if(response.ok){
-      const res = await fetch('/user/getproductlist', {
+      const res = await fetch('user/getproductlist', {
         method: 'POST',
         headers: { "Content-Type": "application/json;charset=utf-8",
       token: loginState.token },
