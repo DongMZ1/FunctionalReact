@@ -18,7 +18,7 @@ const HomePage = ({ loginState, setLoginDispatch, setshowerrorcard, seterrorcard
 
   /*fetch data when reloading */
   useEffect(async () => {
-    let response = await fetch("/product/getallproduct", {
+    let response = await fetch("/api/product/getallproduct", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     });
