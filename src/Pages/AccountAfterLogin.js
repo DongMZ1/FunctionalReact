@@ -29,7 +29,7 @@ const AfterLogin = ({setshowerrorcard, seterrorcardmessage}) => {
             <div className="col-md-2">
               <img
                 style={{ height: "100px" }}
-                src={`/${product.url}`}
+                src={product.url}
                 alt="..."
               />
             </div>
