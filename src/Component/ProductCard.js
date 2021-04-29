@@ -32,6 +32,7 @@ const ProductCard = ({
         setshownotloginmessage(false);
         history.push('Auth/');
       }, 1000)
+      return;
     }
     const response = await fetch(
       "https://mernshoppingminiso.herokuapp.com/api/user/addproducttocart",
