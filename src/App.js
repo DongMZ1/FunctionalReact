@@ -109,7 +109,7 @@ const App = () => {
    async () =>{
    if('token' in localStorage){
      const token = localStorage.getItem('token');
-     const response = await fetch('/api/user/localstorage',
+     const response = await fetch('https://mernshoppingminiso.herokuapp.com/api/user/localstorage',
      {
        method: 'POST',
        headers: {'Content-Type': 'application/json;charset=utf-8',

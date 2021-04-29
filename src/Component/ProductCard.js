@@ -34,7 +34,7 @@ const ProductCard = ({
       }, 1000)
     }
     const response = await fetch(
-      "/api/user/addproducttocart",
+      "https://mernshoppingminiso.herokuapp.com/api/user/addproducttocart",
       {
         method: "POST",
         body: JSON.stringify({

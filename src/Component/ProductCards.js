@@ -14,7 +14,7 @@ const ProductCards = ({ setshowerrorcard, seterrorcardmessage, setshowshoppingca
             <div className="col-md-2">
               <img
                 style={{ height: "100px" }}
-                src={`/${product.url}`}
+                src={product.url}
                 alt="..."
               />
             </div>
@@ -27,7 +27,7 @@ const ProductCards = ({ setshowerrorcard, seterrorcardmessage, setshowshoppingca
                   <Button
                     onClick={async () => {
                       const response = await fetch(
-                        "/api/user/removeproductfromcart",
+                        "https://mernshoppingminiso.herokuapp.com/api/user/removeproductfromcart",
                         {
                           method: "POST",
                           body: JSON.stringify({
@@ -72,7 +72,7 @@ const ProductCards = ({ setshowerrorcard, seterrorcardmessage, setshowshoppingca
                   {product.number}
                   <Button
                     onClick={async () => {
-                      const response = await fetch("/api/user/addproducttocart", {
+                      const response = await fetch("https://mernshoppingminiso.herokuapp.com/api/user/addproducttocart", {
                         method: "POST",
                         body: JSON.stringify({
                           title: product.title,
@@ -115,7 +115,7 @@ const ProductCards = ({ setshowerrorcard, seterrorcardmessage, setshowshoppingca
                 <span style={{ marginLeft: "10%" }}>
                   <input
                     onChange={async (e) => {
-                      let response = await fetch("/api/user/selectitemonchange", {
+                      let response = await fetch("https://mernshoppingminiso.herokuapp.com/api/user/selectitemonchange", {
                         method: "POST",
                         body: JSON.stringify({
                           title: product.title,

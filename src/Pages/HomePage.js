@@ -18,7 +18,7 @@ const HomePage = ({ loginState, setLoginDispatch, setshowerrorcard, seterrorcard
 
   /*fetch data when reloading */
   useEffect(async () => {
-    let response = await fetch("/api/product/getallproduct", {
+    let response = await fetch("https://mernshoppingminiso.herokuapp.com/api/product/getallproduct", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     });
@@ -42,7 +42,7 @@ const HomePage = ({ loginState, setLoginDispatch, setshowerrorcard, seterrorcard
     <div className="col-sm-6">
       <ProductCard
         style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}
-        productimage={`/${product.url}`}
+        productimage={product.url}
         producttitle={product.title}
         producttext={product.text}
         productprice={product.price}
