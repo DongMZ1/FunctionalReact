@@ -109,7 +109,11 @@ const App = () => {
    async () =>{
    if('token' in localStorage){
      const token = localStorage.getItem('token');
-     const response = await fetch('https://mernshoppingminiso.herokuapp.com/api/user/localstorage',
+     let response;
+     setshowerrorcard(true);
+     seterrorcardmessage('Server is starting...please wait a second, once the server is ready, this message will disappear')
+     while(!response){
+      response = await fetch('https://mernshoppingminiso.herokuapp.com/api/user/localstorage',
      {
        method: 'POST',
        headers: {'Content-Type': 'application/json;charset=utf-8',
@@ -117,6 +121,8 @@ const App = () => {
       }
      }
      )
+    }
+    setshowerrorcard(false);
      const responseData = await response.json();
 
      /*if token is expired, the log out give user a message */
