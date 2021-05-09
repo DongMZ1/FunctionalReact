@@ -158,6 +158,7 @@ const App = () => {
       //end logic of token in local
     } else {
       //start testing server is running
+      let response;
       seterrorcardmessage(
         "Server is starting...please wait a second, once the server is ready, this message will disappear"
       );
@@ -169,7 +170,6 @@ const App = () => {
             method: "POST",
             headers: {
               "Content-Type": "application/json;charset=utf-8",
-              token: token,
             },
           }
         );
