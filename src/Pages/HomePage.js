@@ -16,7 +16,7 @@ const HomePage = ({ loginState, setLoginDispatch, setshowerrorcard, seterrorcard
   const [shoppinglistfetch, setshoppinglistfetch] = useState([]);
   const [shoppinglistshow, setshoppinglistshow] = useState([]);
 
-  /*fetch data when reloading */
+  /*fetch data when reloading ------------------------------------- */
   useEffect(async () => {
     let response = await fetch("https://mernshoppingminiso.herokuapp.com/api/product/getallproduct", {
       method: "POST",
@@ -26,6 +26,8 @@ const HomePage = ({ loginState, setLoginDispatch, setshowerrorcard, seterrorcard
     setshoppinglistfetch(responseData);
     setshoppinglistshow(responseData);
   }, []);
+
+  /*END fetch data when reloading ------------------------------------- */
 
   const handlesearchchange = (e) => {
     let value = e.target.value.toLowerCase();
@@ -37,6 +39,8 @@ const HomePage = ({ loginState, setLoginDispatch, setshowerrorcard, seterrorcard
       setshoppinglistshow(shoppinglistfetch);
     }
   };
+
+  //show filtered show items -------------------------------------------
 
   let shoppinglistjsx = shoppinglistshow.map((product) => (
     <div className="col-sm-6">
@@ -52,6 +56,7 @@ const HomePage = ({ loginState, setLoginDispatch, setshowerrorcard, seterrorcard
     </div>
   ));
 
+//end show filtered show items -------------------------------------------
   return (
     <Container>
       {/*Search bar for search  */}

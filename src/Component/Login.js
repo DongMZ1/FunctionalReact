@@ -46,7 +46,7 @@ const Login = ({setshowerrorcard, seterrorcardmessage, setLoginOrSignup}) =>{
       
     }
     
-    /*Login page */
+    /*Login form------------------------------------------------------- */
     
     return  <>
         <br />
@@ -68,15 +68,23 @@ const Login = ({setshowerrorcard, seterrorcardmessage, setLoginOrSignup}) =>{
     </Form.Text>
   </Form.Group>
   
+  {/*Start Button for sign in ---------------------------------------------------------- */}
+
   <Button style={{marginLeft : "5%px"}} variant="primary" type="submit" onClick={handlelogin} disabled={!loginformdataisvalid}>
     SIGN IN
   </Button>
+  {/*end Button for sign in ---------------------------------------------------------- */}
 
+   {/*Start Button for switch to signup page ---------------------------------------------------------- */}
   <Button style={{marginLeft:"5%"}} variant="primary" onClick={() => setLoginOrSignup(false)}>
     Do not have an account? Click to create one!
   </Button>
+  {/*end Button for switch to signup page ---------------------------------------------------------- */}
+
+  
 </Form>
      </>
+     /*end of Login form------------------------------------------------------- */
 
 }
 

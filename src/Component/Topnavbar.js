@@ -1,11 +1,9 @@
 import React, {useState} from "react";
-import {Navbar, Nav, NavItem, Modal, Button} from 'react-bootstrap';
-import {FaHome, FaReact, FaEnvelopeOpenText, FaFacebook, FaInstagramSquare, FaLinkedinIn, } from "react-icons/fa";
+import {Navbar, Nav, Modal, Button} from 'react-bootstrap';
+import {FaHome} from "react-icons/fa";
 import {AiOutlineLogout, AiOutlineShoppingCart} from 'react-icons/ai'
 import {MdAccountCircle} from 'react-icons/md'
-import { NavLink } from "react-router-dom";
 import { LinkContainer} from 'react-router-bootstrap';
-import {Link} from 'react-router-dom'
 import {useHistory} from 'react-router-dom'
 const Topnavbar = ({loginState, setLoginDispatch, setshowshoppingcart}) => {
     const history = useHistory();

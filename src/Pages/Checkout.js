@@ -35,7 +35,7 @@ const Checkout = ({setshowerrorcard, seterrorcardmessage}) => {
       return accu + current;
     }, 0);
 
-    /*items user selected */
+    /*start items user selected-------------------------------------------- */
   const productlist = loginState.productcart.filter(
     (product) => product.checked === true
   ).map(product => ({
@@ -43,8 +43,9 @@ const Checkout = ({setshowerrorcard, seterrorcardmessage}) => {
     price: product.price,
     number: product.number
   }));
+  /*end start items user selected-------------------------------------------- */
 
-  /*print out the product list for items that user selected */
+  /*start print out the product list for items that user selected-------------------- */
   const productjsx =
   loginState.productcart
     .filter((product) => product.checked === true)
@@ -74,8 +75,9 @@ const Checkout = ({setshowerrorcard, seterrorcardmessage}) => {
         </div>
       </div>
     ));
+    /*end start print out the product list for items that user selected-------------------- */
   
-     /*the way to submit payment information */
+     /*the way to submit payment information to STRIPE----------------------- */
   const handleToken = async (token) => {
     const response = await fetch("https://mernshoppingminiso.herokuapp.com/api/user/createcheckout", {
       method: "POST",
@@ -129,6 +131,9 @@ const Checkout = ({setshowerrorcard, seterrorcardmessage}) => {
 
 
   };
+
+  /*END the way to submit payment information to STRIPE----------------------- */
+
 
   return (
     <div>

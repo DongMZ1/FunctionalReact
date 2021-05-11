@@ -20,7 +20,7 @@ const AfterLogin = ({setshowerrorcard, seterrorcardmessage}) => {
     .toFixed(2);
 
 
-
+//start show product the user is currently ordering --- user has place the order --------------------------------
   const productorderingjsx = 
     loginState.productordering.map((product) => (
       <>
@@ -50,12 +50,14 @@ const AfterLogin = ({setshowerrorcard, seterrorcardmessage}) => {
       </>
     ))
   
-
+//start show product the user is currently ordering --- user has place the order --------------------------------
 
   return (
     <Container style={{ margin: "5%", fontFamily: "sans-serif" }}>
       <h1>Welcome {loginState.email}</h1>
       <br />
+    {/*start button to show view shopping cart ------------------------------------------- */}
+
       <Button
         style={{ marginLeft: "5%" }}
         onClick={() => {
@@ -66,6 +68,9 @@ const AfterLogin = ({setshowerrorcard, seterrorcardmessage}) => {
       >
         View Shopping Cart
       </Button>
+      {/*end button to show view shopping cart ------------------------------------------- */}
+      
+      {/*start button to show view current orders cart ------------------------------------------- */}   
       <Button
         style={{ marginLeft: "5%" }}
         onClick={() => {
@@ -76,6 +81,10 @@ const AfterLogin = ({setshowerrorcard, seterrorcardmessage}) => {
       >
         View Current Orders
       </Button>
+    {/*end button to show view current orders cart ------------------------------------------- */}  
+
+
+    {/*start button to show view history orders cart ------------------------------------------- */} 
       <Button
         style={{ marginLeft: "5%" }}
         onClick={() => {
@@ -86,10 +95,10 @@ const AfterLogin = ({setshowerrorcard, seterrorcardmessage}) => {
       >
         View Orders History
       </Button>
-
+    {/*end button to show view history orders cart ------------------------------------------- */} 
       <br />
       <br />
-      {/*Start of shopping cart page*/}
+      {/*Start of shopping cart page-------------------------------------------------------------------*/}
       {showshoppingcart && (
         <>
           <h2>Shopping Cart</h2>
@@ -101,6 +110,7 @@ const AfterLogin = ({setshowerrorcard, seterrorcardmessage}) => {
           )}
           <br />
           TOTAL: {totalprice}
+       {/**--------------START if totalprice is 0, then do not allow user to check out */}
           {totalprice < 1 ? (
             <Button
               style={{ marginLeft: "10%", marginRight: "10%" }}
@@ -119,15 +129,17 @@ const AfterLogin = ({setshowerrorcard, seterrorcardmessage}) => {
               </Button>
             </Link>
           )}
+          {/**--------------END if totalprice is 0, then do not allow user to check out */}
+
         </>
       )}
-      {/*End of shopping cart page*/}
+      {/*End of shopping cart page--------------------------------------------------*/}
 
-      {/*Start of orders page*/}
+      {/*Start of orders page---------------------------------------------------------------*/}
       {loginState.productordering.length === 0 ? (showorder && <h2>You do not have any orders yet</h2>) :
           (showorder && productorderingjsx)
         }
-      {/*End of orders page*/}
+      {/*End of orders page-------------------------------------------------------------------*/}
 
       {/*Start of orderhistory page*/}
       {/*End of orderhistory page*/}

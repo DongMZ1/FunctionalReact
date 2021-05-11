@@ -102,7 +102,8 @@ const App = () => {
     </Switch>
   );
 
-  /*similar to redux-logger, printout my 'store' everytime if my store updated */
+  //first check if there is a token in localstorage, if so, fetch data, check its validity and login
+  //if no token, then stay unloged
 
   useEffect(async () => {
     //token, auto login ------------------------------------------------------------------------
@@ -174,13 +175,19 @@ const App = () => {
 
       //end testing server is running---------------------------------------------------------------
     }
-  }
-  , []);
+  }, []);
+  //END ---- first check if there is a token in localstorage, if so, fetch data, check its validity and login
+  //if no token, then stay unloged
+
+  //------similar to redux logger, once store change its value, then it console log
 
   useEffect(() => {
     console.log(JSON.stringify(loginState));
   }, [loginState]);
 
+  //-----------end of similar to redux logger, once store change its value, then it console log
+
+  //--------------------------total price of the cart, need to pass this value to mutiple child component, thus init in here
   let totalprice = 0;
   if (
     loginState.productcart.filter((product) => product.checked === true)
@@ -195,6 +202,9 @@ const App = () => {
         return accu + current;
       }, 0);
   }
+  //-------------------------------end of init total price -----------------------------------------------------------------
+
+  //--------------shopping cart onclick on the navbar -----------------------------------
 
   const shoppingcart = (
     <Modal
@@ -247,6 +257,7 @@ const App = () => {
     </Modal>
   );
 
+  //--------------end of shopping cart onclick on the navbar --------------------------
   return (
     <Router>
       <LoginContext.Provider value={{ loginState, setLoginDispatch }}>
@@ -270,12 +281,14 @@ const App = () => {
   );
 };
 
-const Showserverstartingmodal = ({show}) => {  
-  return  <Modal show={show}>
-    <Modal.Header closeButton>
-      <Modal.Title>Server is starting...</Modal.Title>
-    </Modal.Header>
-  </Modal>
-}
+const Showserverstartingmodal = ({ show }) => {
+  return (
+    <Modal show={show}>
+      <Modal.Header closeButton>
+        <Modal.Title>Server is starting...</Modal.Title>
+      </Modal.Header>
+    </Modal>
+  );
+};
 
 export default App;

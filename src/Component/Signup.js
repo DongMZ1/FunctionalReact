@@ -79,13 +79,19 @@ const Signup = ({setshowerrorcard, seterrorcardmessage, setLoginOrSignup}) =>{
 
 {/*if password is not matching, then disable  */}
 
+{/*Start Button for sign up ---------------------------------------------------------- */}
+
 <Button style={{marginLeft : "5%px"}} variant="primary" type="submit" onClick={handlesignup} disabled={!signupformdataisvalid}>
 SIGN UP
 </Button>
 
+{/*End Button for sign up ---------------------------------------------------------- */}
+
+{/*Start Button for switch to sign in page ---------------------------------------------------------- */}
 <Button style={{marginLeft:"5%"}} variant="primary" onClick={() => setLoginOrSignup(true)}>
 Already have an account? Click to sign in!
 </Button>
+{/*END Button for switch to sign in page ---------------------------------------------------------- */}
 </Form>
     </>
 }

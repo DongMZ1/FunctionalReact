@@ -24,6 +24,7 @@ const ProductCards = ({ setshowerrorcard, seterrorcardmessage, setshowshoppingca
                 <br />
                 price : {product.price}
                 <span style={{ paddingLeft: "10%" }}>
+  {/*start button for decrease the number of product in cart ------------------------------------------------ */}       
                   <Button
                     onClick={async () => {
                       const response = await fetch(
@@ -68,8 +69,11 @@ const ProductCards = ({ setshowerrorcard, seterrorcardmessage, setshowshoppingca
                   >
                     DECREASE
                   </Button>
+    {/*start button for decrease the number of product in cart ----------------------------------- */}
 
                   {product.number}
+
+    {/*start button for INCREASE the number of product in cart ----------------------------------- */}              
                   <Button
                     onClick={async () => {
                       const response = await fetch("https://mernshoppingminiso.herokuapp.com/api/user/addproducttocart", {
@@ -111,7 +115,12 @@ const ProductCards = ({ setshowerrorcard, seterrorcardmessage, setshowshoppingca
                   >
                     INCREASE
                   </Button>
+
                 </span>
+   {/*end button for INCREASE the number of product in cart ----------------------------------- */} 
+
+
+   {/**start of select product in product cart ----------------------------------------------------------- */}                 
                 <span style={{ marginLeft: "10%" }}>
                   <input
                     onChange={async (e) => {
@@ -161,6 +170,7 @@ const ProductCards = ({ setshowerrorcard, seterrorcardmessage, setshowshoppingca
                     Select
                   </label>
                 </span>
+   {/**end of select product in product cart ----------------------------------------------------------- */}             
               </div>
             </div>
           </div>
