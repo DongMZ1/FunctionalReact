@@ -58,6 +58,7 @@ const App = () => {
   /*error handling at top level*/
   const [showerrorcard, setshowerrorcard] = useState(false);
   const [errorcardmessage, seterrorcardmessage] = useState("");
+  const [showserverstart, setshowserverstart] = useState(false);
   const history = useHistory();
 
   const [loginState, setLoginDispatch] = useReducer(loginReducer, {
@@ -104,14 +105,12 @@ const App = () => {
   /*similar to redux-logger, printout my 'store' everytime if my store updated */
 
   useEffect(async () => {
+    //token, auto login ------------------------------------------------------------------------
     if ("token" in localStorage) {
       //start logic of token in local
       const token = localStorage.getItem("token");
       let response;
-      seterrorcardmessage(
-        "Server is starting...please wait a second, once the server is ready, this message will disappear"
-      );
-      setshowerrorcard(true);
+      setshowserverstart(true);
       while (!response) {
         response = await fetch(
           "https://mernshoppingminiso.herokuapp.com/api/user/localstorage",
@@ -124,7 +123,7 @@ const App = () => {
           }
         );
       }
-      setshowerrorcard(false);
+      setshowserverstart(false);
       const responseData = await response.json();
 
       /*if token is expired, the log out give user a message */
@@ -155,14 +154,11 @@ const App = () => {
         productfinished: responseData.productfinished,
       });
 
-      //end logic of token in local
+      //start of check local storgae ------------------------------------------------------------------------
     } else {
-      //start testing server is running
+      //start testing server is runningm if there is no token in local-----------------------------------------------------
       let response;
-      seterrorcardmessage(
-        "Server is starting...please wait a second, once the server is ready, this message will disappear"
-      );
-      setshowerrorcard(true);
+      setshowserverstart(true);
       while (!response) {
         response = await fetch(
           "https://mernshoppingminiso.herokuapp.com/api/user/localstorage",
@@ -174,11 +170,12 @@ const App = () => {
           }
         );
       }
-      setshowerrorcard(false);
+      setshowserverstart(false);
 
-      //end testing server is running
+      //end testing server is running---------------------------------------------------------------
     }
-  }, []);
+  }
+  , []);
 
   useEffect(() => {
     console.log(JSON.stringify(loginState));
@@ -253,6 +250,9 @@ const App = () => {
   return (
     <Router>
       <LoginContext.Provider value={{ loginState, setLoginDispatch }}>
+        {/**------------------------------------------------------show server starting modal */}
+        <Showserverstartingmodal show={showserverstart} />
+        {/**end --------------------------------------------------- show server starting modal */}
         <Topnavbar
           loginState={loginState}
           setLoginDispatch={setLoginDispatch}
@@ -269,5 +269,13 @@ const App = () => {
     </Router>
   );
 };
+
+const Showserverstartingmodal = ({show}) => {  
+  return  <Modal show={show}>
+    <Modal.Header closeButton>
+      <Modal.Title>Server is starting...</Modal.Title>
+    </Modal.Header>
+  </Modal>
+}
 
 export default App;
