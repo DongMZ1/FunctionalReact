@@ -1,5 +1,6 @@
 import React, { useState, useReducer, useEffect } from "react";
 import { LoginContext } from "./usecontext/logincontext";
+import './index.css'
 import {
   BrowserRouter as Router,
   Switch,

@@ -15,9 +15,11 @@ const HomePage = ({ loginState, setLoginDispatch, setshowerrorcard, seterrorcard
     */
   const [shoppinglistfetch, setshoppinglistfetch] = useState([]);
   const [shoppinglistshow, setshoppinglistshow] = useState([]);
+  const [shoppingKeyWord, setshoppingKeyWord] = useState("");
 
   /*fetch data when reloading ------------------------------------- */
-  useEffect(async () => {
+  useEffect(() => {
+    const fetchdata = async () =>{
     let response = await fetch("https://mernshoppingminiso.herokuapp.com/api/product/getallproduct", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -25,24 +27,29 @@ const HomePage = ({ loginState, setLoginDispatch, setshowerrorcard, seterrorcard
     let responseData = await response.json();
     setshoppinglistfetch(responseData);
     setshoppinglistshow(responseData);
+  }
+     fetchdata();
   }, []);
 
-  /*END fetch data when reloading ------------------------------------- */
-
-  const handlesearchchange = (e) => {
-    let value = e.target.value.toLowerCase();
-    let filtered = shoppinglistshow.filter((product) => {
-      return product.title.toLowerCase().match(value);
+  useEffect(()=>{
+    let filtered = shoppinglistfetch.filter((product) => {
+      return product.title.toLowerCase().includes((shoppingKeyWord?.toLowerCase()));
     });
     setshoppinglistshow(filtered);
-    if (value == "") {
-      setshoppinglistshow(shoppinglistfetch);
-    }
-  };
+  }, [shoppingKeyWord])
 
-  //show filtered show items -------------------------------------------
 
-  let shoppinglistjsx = shoppinglistshow.map((product) => (
+//end show filtered show items -------------------------------------------
+  return (
+    <div className='px-5 py-5'>
+      {/*Search bar for search  */}
+        <input
+          type="text"
+          placeholder="Search"
+          style={{ width: "30rem" }}
+          onChange={(e)=>{setshoppingKeyWord(e.target.value)}}
+        />
+      <div className="row">{shoppinglistshow.map((product) => (
     <div className="col-sm-6">
       <ProductCard
         style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}
@@ -54,27 +61,8 @@ const HomePage = ({ loginState, setLoginDispatch, setshowerrorcard, seterrorcard
         seterrorcardmessage={seterrorcardmessage}
       />
     </div>
-  ));
-
-//end show filtered show items -------------------------------------------
-  return (
-    <Container>
-      {/*Search bar for search  */}
-
-      <br />
-      <br />
-      <Form inline>
-        <FormControl
-          type="text"
-          placeholder="Search By Keywords"
-          style={{ width: "30rem" }}
-          onChange={handlesearchchange}
-        />
-      </Form>
-      <br />
-      <br />
-      <div className="row">{shoppinglistjsx}</div>
-    </Container>
+  ))}</div>
+    </div>
   );
 };
 
