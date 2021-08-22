@@ -88,6 +88,7 @@ const App = () => {
 
       <Route path={"/Auth/*"} exact>
         <Auth
+          innerWidth={innerWidth}
           setshowerrorcard={setshowerrorcard}
           seterrorcardmessage={seterrorcardmessage}
         />
@@ -214,7 +215,7 @@ const App = () => {
     <Modal
       show={showshoppingcart}
       onHide={() => setshowshoppingcart(false)}
-      dialogClassName="modal-90w"
+      dialogClassName="modal-90w bg-none"
       size="lg"
       aria-labelledby="example-custom-modal-styling-title"
     >
@@ -291,7 +292,7 @@ const Showserverstartingmodal = ({ show }) => {
   return (
     <Modal size='sm' className='rounder-border' show={show}>
       <Modal.Header>
-        <div className='font-18p text-center width-100'>Server is Loading</div>
+        <div className='font-18p text-center width-100'>Server is Loading...</div>
       </Modal.Header>
     </Modal>
   );

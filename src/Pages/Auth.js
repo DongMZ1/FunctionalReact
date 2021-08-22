@@ -1,39 +1,51 @@
-import React, {useState, useContext} from 'react'
+import React, { useState, useContext } from 'react'
+import { Row, Col, Container } from 'react-bootstrap'
 import AfterLogin from './AccountAfterLogin'
-import {useHistory} from 'react-router-dom'
-import {LoginContext} from '../usecontext/logincontext'
+import { useHistory } from 'react-router-dom'
+import { LoginContext } from '../usecontext/logincontext'
 import Signup from '../Component/Signup'
 import Login from '../Component/Login'
 
-const Auth = ({setshowerrorcard, seterrorcardmessage}) => {
-    const {loginState, setLoginDispatch} = useContext(LoginContext)
+const Auth = ({ setshowerrorcard, seterrorcardmessage, innerWidth }) => {
+  const { loginState, setLoginDispatch } = useContext(LoginContext)
 
-    const history = useHistory();
+  const history = useHistory();
 
-   /*check if it is in the login page or sign up page, login page return true, sign up page return false*/
-    const [LoginOrSignup, setLoginOrSignup] = useState(true);
+  /*check if it is in the login page or sign up page, login page return true, sign up page return false*/
+  const [LoginOrSignup, setLoginOrSignup] = useState(true);
 
-       
-      if(!loginState.isLogin){
-        return <>
-            {LoginOrSignup && 
-            <Login 
-            setshowerrorcard={setshowerrorcard}
-            seterrorcardmessage={seterrorcardmessage}
-            setLoginOrSignup={setLoginOrSignup}
-            />
-            }
-            {!LoginOrSignup && <Signup 
-            setshowerrorcard={setshowerrorcard}
-            seterrorcardmessage={seterrorcardmessage}
-            setLoginOrSignup={setLoginOrSignup}
-            />}
-        </>
-      }
 
-      return(
-          <AfterLogin setshowerrorcard={setshowerrorcard} seterrorcardmessage={seterrorcardmessage} />
-      )
+  if (!loginState.isLogin) {
+    return  <Row className='justify-content-center mb-100p mx-4'>
+      <Col sm={3} className='px-3'>
+         <div className='mt-100p blue-color'>
+           <h5>Welcome to</h5>
+           <h6>Mingzhou Shopping Center</h6>
+           <div className='font-14p'>Mingzhou Shopping Center is a Toy e-commerce company headquartered in Montreal, Quebec, Canada.</div>
+         </div>
+      </Col>
+      <Col sm={3} className='px-3'>
+      {LoginOrSignup ?
+        <Login
+          innerWidth={innerWidth}
+          setshowerrorcard={setshowerrorcard}
+          seterrorcardmessage={seterrorcardmessage}
+          setLoginOrSignup={setLoginOrSignup}
+        />
+        :
+        <Signup
+          innerWidth={innerWidth}
+          setshowerrorcard={setshowerrorcard}
+          seterrorcardmessage={seterrorcardmessage}
+          setLoginOrSignup={setLoginOrSignup}
+        />}
+        </Col>
+    </Row>
+  }
+
+  return (
+    <AfterLogin setshowerrorcard={setshowerrorcard} seterrorcardmessage={seterrorcardmessage} />
+  )
 
 }
 
