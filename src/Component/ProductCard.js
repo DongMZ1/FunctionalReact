@@ -9,7 +9,7 @@ import {
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { LoginContext } from "../usecontext/logincontext";
 import { Modal } from "react-bootstrap";
-import {useHistory} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const ProductCard = ({
   productimage,
@@ -25,10 +25,10 @@ const ProductCard = ({
   const history = useHistory();
 
   const addproducttocart = async () => {
-    if(!loginState.isLogin){
+    if (!loginState.isLogin) {
       setshownotloginmessage(true);
 
-      setTimeout(()=>{
+      setTimeout(() => {
         setshownotloginmessage(false);
         history.push('Auth/');
       }, 1000)
@@ -41,16 +41,16 @@ const ProductCard = ({
         body: JSON.stringify({
           title: producttitle,
         }),
-        headers: { 
+        headers: {
           "Content-Type": "application/json;charset=utf-8",
-           'token': loginState.token
-      },
+          'token': loginState.token
+        },
       }
     );
 
     const responseData = await response.json();
     /*if token is expired, the log out give user a message */
-    if(response.status === 438){
+    if (response.status === 438) {
       seterrorcardmessage(responseData.message);
       setshowerrorcard(true);
       localStorage.clear();
@@ -60,30 +60,30 @@ const ProductCard = ({
         isLogin: false,
         token: null,
         productcart: [],
-        productordering:[],
+        productordering: [],
         productfinished: []
-    })
-    history.push('/Auth/');
-    return;
- }
- /*END of token is expired*/
+      })
+      history.push('/Auth/');
+      return;
+    }
+    /*END of token is expired*/
     setLoginDispatch({ type: "addcart", products: responseData.data });
     setshowaddtocartmessage(true);
-    setTimeout(()=>{setshowaddtocartmessage(false);}, 1000);
+    setTimeout(() => { setshowaddtocartmessage(false); }, 1000);
   };
 
   const successfulmessage = (
-    <Modal show={showaddtocartmessage}>
+    <Modal size='sm' className='rounder-border' show={showaddtocartmessage}>
       <Modal.Header>
-        <Modal.Title>Successfully add "{producttitle}" to Cart</Modal.Title>
+        <div className='font-16p text-center width-100'>Successfully add "{producttitle}" to Cart</div>
       </Modal.Header>
     </Modal>
   );
 
   const notloginmessage = (
-    <Modal show={shownotloginmessage}>
+    <Modal size='sm' className='rounder-border' show={shownotloginmessage}>
       <Modal.Header>
-        <Modal.Title>PlEASE SIGN IN</Modal.Title>
+        <div className='font-18p text-center width-100'>Please Login in</div>
       </Modal.Header>
     </Modal>
   );
@@ -91,7 +91,7 @@ const ProductCard = ({
 
   return (
     <>
-      <div className='round-border lightblue-border lightblue-bg' style={{ width: "15rem" }}>
+      <div className='round-border lightblue-border lightblue-bg' style={{ width: "95%" }}>
         <Card.Img className='rounder-border' variant="top" src={productimage} />
         <Card.Body>
           <Card.Title className="font-16p">{producttitle}</Card.Title>

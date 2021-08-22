@@ -25,6 +25,7 @@
     background-color: white;
 }
 
+
 .z-100 {
     z-index: 100;
 }
@@ -62,7 +63,7 @@
      width: max-content;
  }
 .white-color {
-    color: white;
+    color: white !important;
 }
 
 .border-bottom-blue {
@@ -94,4 +95,33 @@
 
 .gray-border {
     border: lightgray 2px solid; 
+}
+
+.text-center {
+    text-align: center;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.font-18p {
+    font-size: 18px;
+}
+
+.bg-none,
+.bg-none .modal-content {
+    border: none;
+    background-color: transparent;
+}
+.bg-none .modal-content .modal-header {
+    border: none;
+}
+
+.close {
+    color: white;
+}
+.close span{color: #fff}
+.bg-none .modal-content .modal-body {
+    background-color: #fff;
 }

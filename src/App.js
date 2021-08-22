@@ -19,6 +19,7 @@ import Errorhandlepage from "./Pages/Errorhandlepage";
 import ProductCards from "./Component/ProductCards";
 import Checkout from "./Pages/Checkout";
 import ErrorCard from "./Component/error/ErrorCard";
+import Footer from './Component/Footer'
 
 /* The state control for login/log out is using useContext hook to pass useReducer to child component*/
 function loginReducer(state, action) {
@@ -277,6 +278,7 @@ const App = () => {
           message={errorcardmessage}
           setshow={setshowerrorcard}
         />
+        <Footer />
       </LoginContext.Provider>
     </Router>
   );
@@ -284,10 +286,10 @@ const App = () => {
 
 const Showserverstartingmodal = ({ show }) => {
   return (
-    <Modal show={show}>
-      <Modal.Header closeButton>
-        <Modal.Title>Server is starting...</Modal.Title>
-      </Modal.Header>
+    <Modal size='sm' className='rounder-border' show={show}>
+            <Modal.Header>
+                <div className='font-18p text-center width-100'>Server is Loading</div>
+            </Modal.Header>
     </Modal>
   );
 };

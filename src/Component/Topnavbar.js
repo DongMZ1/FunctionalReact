@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navbar, Nav, Modal, Button } from 'react-bootstrap';
 import { FaHome } from "react-icons/fa";
-import { AiOutlineLogout, AiOutlineShoppingCart } from 'react-icons/ai'
+import { AiOutlineLogout, AiOutlineShoppingCart, AiFillShop } from 'react-icons/ai'
 import { MdAccountCircle } from 'react-icons/md'
 import { LinkContainer } from 'react-router-bootstrap';
 import { useHistory } from 'react-router-dom'
@@ -26,9 +26,9 @@ const Topnavbar = ({ loginState, setLoginDispatch, setshowshoppingcart }) => {
     }
 
     const showlogoutmodal =
-        <Modal show={showlogout}>
-            <Modal.Header closeButton>
-                <Modal.Title>Successfully Log out</Modal.Title>
+        <Modal size='sm' className='rounder-border' show={showlogout}>
+            <Modal.Header>
+                <div className='font-18p text-center width-100'>Successfully Log out</div>
             </Modal.Header>
         </Modal>
 
@@ -36,12 +36,12 @@ const Topnavbar = ({ loginState, setLoginDispatch, setshowshoppingcart }) => {
     return (
         <>
 
-            <div className={`disp-flex ${window.innerWidth > 700 ? 'static':'fixed z-100 white-bg border-bottom-blue'}`} style={{height:'max-content'}}>
+            <div className={`disp-flex py-2 ${window.innerWidth > 700 ? 'static':'fixed z-100 white-bg border-bottom-blue'}`} style={{height:'max-content'}}>
 
 
                         <LinkContainer to={'/'}>
                             <Nav.Link>
-                                <FaHome fontSize="30px" /><span style={{ whiteSpace: "nowrap",fontSize:'15px' }}>HOME PAGE</span>
+                                <AiFillShop fontSize="30px" /><span style={{ whiteSpace: "nowrap",fontSize:'15px' }}>Home</span>
                             </Nav.Link>
                         </LinkContainer>
 

@@ -1,27 +1,23 @@
 import React from 'react';
 import { createPortal, useState } from "react-dom";
-import {Modal, Button} from 'react-bootstrap'
+import { Modal, Button } from 'react-bootstrap'
 
-const ErrorCard = ({message, show, setshow}) =>{
+const ErrorCard = ({ message, show, setshow }) => {
 
-   return createPortal(
-       <>
-       {
-        <Modal show={show}>
-        <Modal.Header closeButton>
-          <Modal.Title>There is an ERROR!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{message}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={()=>setshow(show => !show)}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
-       }
-       </>, document.getElementById('ErrorCard')
-        
-    )
+
+  return createPortal(
+    <>
+      {
+        <Modal 
+        dialogClassName='bg-none'
+        show={show} onHide={()=>setshow(state => !state)} >
+          <Modal.Header className='white-color' closeButton />
+          <Modal.Body className='rounder-border py-5'> <div className='font-18p text-center width-100'>{message}</div></Modal.Body>
+        </Modal>
+      }
+    </>, document.getElementById('ErrorCard')
+
+  )
 }
 
 export default ErrorCard;
