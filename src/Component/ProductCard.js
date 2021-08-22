@@ -91,22 +91,22 @@ const ProductCard = ({
 
   return (
     <>
-      <Card style={{ width: "30rem" }}>
-        <Card.Img variant="top" src={productimage} />
+      <div className='round-border lightblue-border lightblue-bg' style={{ width: "15rem" }}>
+        <Card.Img className='rounder-border' variant="top" src={productimage} />
         <Card.Body>
-          <Card.Title>{producttitle}</Card.Title>
-          <Card.Text>{producttext}</Card.Text>
+          <Card.Title className="font-16p">{producttitle}</Card.Title>
+          <Card.Text className="font-14p">{producttext}</Card.Text>
         </Card.Body>
         <ListGroup className="list-group-flush">
-          <ListGroupItem>Price : {productprice} $</ListGroupItem>
+          <ListGroupItem className="font-14p">Price : <b>{productprice} $</b></ListGroupItem>
           <ListGroupItem>
-            <Button variant="primary" onClick={addproducttocart}>
+            <div className='blue-bg round-border cursor-pointer width-max-content px-3 py-1 font-14p white-color' onClick={addproducttocart}>
               ADD to Chart
-              <AiOutlineShoppingCart style={{ fontSize: "2em" }} />
-            </Button>
+              <AiOutlineShoppingCart className='ml-1' style={{ fontSize: "22px" }} />
+            </div>
           </ListGroupItem>
         </ListGroup>
-      </Card>
+      </div>
       {successfulmessage}
       {notloginmessage}
     </>

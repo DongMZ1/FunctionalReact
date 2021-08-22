@@ -1,3 +1,97 @@
 .disp-flex {
     display: flex;
 }
+.search-bar {
+    width: 60%;
+    border-radius: 20px;
+    outline: none;
+    font-size: 15px;
+    border: lightblue 2px solid;
+}
+
+.font-16p {
+    font-size: 16px !important;
+}
+
+.static {
+    position: static;
+}
+
+.fixed {
+    position: fixed
+}
+
+.white-bg{
+    background-color: white;
+}
+
+.z-100 {
+    z-index: 100;
+}
+
+.mt-60p {
+    margin-top: 60px;
+}
+
+.height-100p {
+    height: 100px;
+}
+
+.blue-bg {
+   background-color: rgb(74, 120, 218);
+}
+
+.rounder-border {
+    border-radius: 20px;
+}
+
+
+.cursor-pointer {
+   cursor: pointer;
+}
+
+.lightblue-bg {
+    background-color: rgb(233, 226, 247);
+ }
+
+.lightblue-border {
+    border: rgb(233, 226, 247) 4px solid;
+}
+
+ .width-max-content {
+     width: max-content;
+ }
+.white-color {
+    color: white;
+}
+
+.border-bottom-blue {
+    border-bottom: blue 2px solid;
+}
+.font-14p {
+    font-size: 14px;
+}
+.search-bar::placeholder {
+    color: rgb(74, 120, 218);
+    font-weight: 700;
+}
+
+.gray-color {
+    color: gray;
+}
+.blue-color {
+    color: blueviolet;
+}
+.mt-15px {
+    margin-top: 15px;
+}
+.top-5px {
+    top:5px
+}
+.round-border {
+    border-radius: 10px;
+}
+
+.gray-border {
+    border: lightgray 2px solid; 
+}

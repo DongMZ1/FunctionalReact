@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "../Component/ProductCard";
+import {BiSearchAlt2} from 'react-icons/bi'
 import {
   Container,
   Row,
@@ -41,16 +42,19 @@ const HomePage = ({ loginState, setLoginDispatch, setshowerrorcard, seterrorcard
 
 //end show filtered show items -------------------------------------------
   return (
-    <div className='px-5 py-5'>
+    <div className='px-5 py-3'>
       {/*Search bar for search  */}
+      <div className='position-relative'>
+      <BiSearchAlt2 className='position-absolute blue-color top-5px left-0 mt-2 ml-2' />
         <input
           type="text"
-          placeholder="Search"
-          style={{ width: "30rem" }}
+          className='search-bar px-4 py-2 mb-4'
+          placeholder="Search Items"
           onChange={(e)=>{setshoppingKeyWord(e.target.value)}}
         />
+        </div>
       <div className="row">{shoppinglistshow.map((product) => (
-    <div className="col-sm-6">
+    <div className={`${window.innerWidth > 1338? 'col-sm-3' : window.innerWidth > 1000? 'col-sm-4' : 'col-sm-6'} justify-content-center`}>
       <ProductCard
         style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}
         productimage={product.url}

@@ -36,7 +36,7 @@ const Topnavbar = ({ loginState, setLoginDispatch, setshowshoppingcart }) => {
     return (
         <>
 
-            <div className='disp-flex' style={{height:'max-content'}}>
+            <div className={`disp-flex ${window.innerWidth > 700 ? 'static':'fixed z-100 white-bg border-bottom-blue'}`} style={{height:'max-content'}}>
 
 
                         <LinkContainer to={'/'}>
@@ -70,6 +70,11 @@ const Topnavbar = ({ loginState, setLoginDispatch, setshowshoppingcart }) => {
                 }
 
             </div>
+            {
+                (window.innerWidth) < 700 && <div className='height-100p'>
+
+                </div>
+            }
             {showlogoutmodal}
         </>
     )
