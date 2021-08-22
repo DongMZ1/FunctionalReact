@@ -10,7 +10,7 @@ import {
   useHistory,
 } from "react-router-dom";
 import { Modal, Button, Card } from "react-bootstrap";
-
+import useWindowSize from "@rooks/use-window-size"
 /*Component */
 import HomePage from "./Pages/HomePage";
 import Auth from "./Pages/Auth";
@@ -55,6 +55,7 @@ function loginReducer(state, action) {
 }
 
 const App = () => {
+  const { innerWidth, innerHeight, outerHeight, outerWidth } = useWindowSize();
   const [showshoppingcart, setshowshoppingcart] = useState(false);
 
   /*error handling at top level*/
@@ -77,6 +78,7 @@ const App = () => {
     <Switch>
       <Route path={"/"} exact>
         <HomePage
+          innerWidth={innerWidth}
           loginState={loginState}
           setLoginDispatch={setLoginDispatch}
           setshowerrorcard={setshowerrorcard}
@@ -267,6 +269,7 @@ const App = () => {
         <Showserverstartingmodal show={showserverstart} />
         {/**end --------------------------------------------------- show server starting modal */}
         <Topnavbar
+          innerWidth={innerWidth}
           loginState={loginState}
           setLoginDispatch={setLoginDispatch}
           setshowshoppingcart={setshowshoppingcart}
@@ -287,9 +290,9 @@ const App = () => {
 const Showserverstartingmodal = ({ show }) => {
   return (
     <Modal size='sm' className='rounder-border' show={show}>
-            <Modal.Header>
-                <div className='font-18p text-center width-100'>Server is Loading</div>
-            </Modal.Header>
+      <Modal.Header>
+        <div className='font-18p text-center width-100'>Server is Loading</div>
+      </Modal.Header>
     </Modal>
   );
 };

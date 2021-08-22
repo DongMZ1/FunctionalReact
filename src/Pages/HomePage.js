@@ -10,7 +10,7 @@ import {
   FormControl,
 } from "react-bootstrap";
 
-const HomePage = ({ loginState, setLoginDispatch, setshowerrorcard, seterrorcardmessage}) => {
+const HomePage = ({ loginState, setLoginDispatch, setshowerrorcard, seterrorcardmessage, innerWidth}) => {
   /*shopping list is an array, shoppinglistfetch is data from backend, but shioppinglist show
     is what acutally displaying on the screen.
     */
@@ -54,7 +54,7 @@ const HomePage = ({ loginState, setLoginDispatch, setshowerrorcard, seterrorcard
         />
         </div>
       <div className="row">{shoppinglistshow.map((product) => (
-    <div className={`${window.innerWidth > 1338? 'col-sm-3' : window.innerWidth > 1000? 'col-sm-4' : 'col-sm-6'} justify-content-center`}>
+    <div className={`${innerWidth > 1338? 'col-sm-3' : innerWidth > 1000? 'col-sm-4' : 'col-sm-6'} justify-content-center`}>
       <ProductCard
         style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)" }}
         productimage={product.url}

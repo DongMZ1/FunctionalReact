@@ -5,7 +5,7 @@ import { AiOutlineLogout, AiOutlineShoppingCart, AiFillShop } from 'react-icons/
 import { MdAccountCircle } from 'react-icons/md'
 import { LinkContainer } from 'react-router-bootstrap';
 import { useHistory } from 'react-router-dom'
-const Topnavbar = ({ loginState, setLoginDispatch, setshowshoppingcart }) => {
+const Topnavbar = ({ loginState, setLoginDispatch, setshowshoppingcart, innerWidth }) => {
     const history = useHistory();
     const [showlogout, setshowlogout] = useState(false);
 
@@ -36,42 +36,32 @@ const Topnavbar = ({ loginState, setLoginDispatch, setshowshoppingcart }) => {
     return (
         <>
 
-            <div className={`disp-flex py-2 ${window.innerWidth > 700 ? 'static':'fixed z-100 white-bg border-bottom-blue'}`} style={{height:'max-content'}}>
+            <div className={`disp-flex width-100 py-2 ${innerWidth > 768 ? 'static' : 'fixed z-100 white-bg border-bottom-blue'}`} style={{ height: 'max-content' }}>
+                <LinkContainer to={'/'}>
+                    <Nav.Link>
+                        <AiFillShop fontSize="30px" /><span style={{ whiteSpace: "nowrap", fontSize: '15px' }}>Home</span>
+                    </Nav.Link>
+                </LinkContainer>
 
-
-                        <LinkContainer to={'/'}>
-                            <Nav.Link>
-                                <AiFillShop fontSize="30px" /><span style={{ whiteSpace: "nowrap",fontSize:'15px' }}>Home</span>
-                            </Nav.Link>
-                        </LinkContainer>
-
-                        <LinkContainer to={'/Auth/' + loginState.email}>
-                            <Nav.Link>
-                                <MdAccountCircle fontSize="30px" /><span style={{ whiteSpace: "nowrap", fontSize:'15px' }}>Account</span>
-                            </Nav.Link>
-                        </LinkContainer>
-
-
-                   
-
-
-
-               
+                <LinkContainer to={'/Auth/' + loginState.email}>
+                    <Nav.Link>
+                        <MdAccountCircle fontSize="30px" /><span style={{ whiteSpace: "nowrap", fontSize: '15px' }}>Account</span>
+                    </Nav.Link>
+                </LinkContainer>
                 {loginState.isLogin &&
                     <Nav.Link className='ml-auto' onClick={() => setshowshoppingcart(show => !show)}>
-                        <AiOutlineShoppingCart fontSize="30px" /><span style={{ whiteSpace: "nowrap", fontSize:'15px' }}>Shopping Cart</span>
+                        <AiOutlineShoppingCart fontSize="30px" /><span style={{ whiteSpace: "nowrap", fontSize: '15px' }}>Shopping Cart</span>
                     </Nav.Link>
                 }
-
                 {loginState.isLogin &&
                     <Nav.Link onClick={handlelogout}>
-                        <AiOutlineLogout fontSize="30px" /><span style={{ whiteSpace: "nowrap", fontSize:'15px' }}>log out</span>
+                        <AiOutlineLogout fontSize="30px" /><span style={{ whiteSpace: "nowrap", fontSize: '15px' }}>log out</span>
                     </Nav.Link>
                 }
 
             </div>
             {
-                (window.innerWidth) < 700 && <div className='height-100p'>
+                (innerWidth) < 700 && <div className='height-100p'>
 
                 </div>
             }
