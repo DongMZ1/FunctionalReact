@@ -46,6 +46,10 @@
     height: 100px;
 }
 
+.height-max-content {
+    height: max-content;
+}
+
 .blue-bg {
    background-color: rgb(74, 120, 218);
 }
@@ -111,6 +115,7 @@
 .search-bar::placeholder {
     color: skyblue;
 }
+
 
 .gray-color {
     color: gray;
@@ -178,13 +183,22 @@ input:-internal-autofill-selected {
 .close {
     color: white;
 }
+.hidden {
+    opacity: 0 !important;
+}
 .close span {color: #fff}
 
 .bg-none .modal-content .modal-body {
     border-radius: 20px;
     background-color: #fff;
 }
+.modal-content {
+    border-radius: 20px !important;
+}
 
+.modal-header {
+    border-bottom: none !important;
+}
 .outline-none {
     outline: none;
 }

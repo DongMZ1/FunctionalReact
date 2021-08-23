@@ -54,10 +54,10 @@ const AfterLogin = ({ setshowerrorcard, seterrorcardmessage }) => {
 
   return (
     <Row className='mx-2 mt-3 blue-color'>
-      <Col lg={6} className='offset-lg-2 offset-md-1'>
+      <Col xl={6} lg={7} md={9} className='offset-lg-2 offset-md-1'>
         <h6 className='width-max-content'>{loginState.email}</h6>
         {/*start button to show view shopping cart ------------------------------------------- */}
-        <div className='disp-flex'>
+        <div className='disp-flex mb-3'>
           <div
             className={`font-14p cursor-pointer bold ${showshoppingcart && 'border-bottom-blue'} width-max-content`}
             onClick={() => {
@@ -97,47 +97,40 @@ const AfterLogin = ({ setshowerrorcard, seterrorcardmessage }) => {
           </div>
           {/*end button to show view history orders cart ------------------------------------------- */}
         </div>
-      </Col>
-      {/*Start of shopping cart page-------------------------------------------------------------------*/}
-      {showshoppingcart && (
-        <>
-          <Row className='offset-lg-2 offset-md-1'>
-            <Col lg={5}>
-              {loginState.productcart.length === 0 ? (
-                "Shopping Cart is Empty"
-              ) : (
-                <ProductCards setshowerrorcard={setshowerrorcard} seterrorcardmessage={seterrorcardmessage} />
-              )}
-            </Col>
-          </Row>
-          TOTAL: {totalprice}
-          {/**--------------START if totalprice is 0, then do not allow user to check out */}
-          {totalprice < 1 ? (
-            null
+        {/*Start of shopping cart page-------------------------------------------------------------------*/}
+        {showshoppingcart && (
+          loginState.productcart.length === 0 ? (
+            "Shopping Cart is Empty"
           ) : (
-            <Link to={"/Checkout/"}>
-              <Button
-                style={{ marginLeft: "10%", marginRight: "10%" }}
-                variant="primary"
-              >
-                Check Out
-              </Button>
-            </Link>
-          )}
-          {/**--------------END if totalprice is 0, then do not allow user to check out */}
+            <>
+              <ProductCards setshowerrorcard={setshowerrorcard} seterrorcardmessage={seterrorcardmessage} />
+              <div className='disp-flex space-between'>
+                <div className='blue-color ml-2 font-16p'>(Product Subtotal : <b>{totalprice}</b> + (GST/QST : <b>{(totalprice * 0.15).toFixed(2)}</b>)
+                  <br />
+                  Estimated Total: <b>{(totalprice * 1.15).toFixed(2)}</b>
+                </div>
+                {totalprice > 1 &&
+                    <div
+                      className='blue-bg height-max-content cursor-pointer font-14p bold mr-4 py-1 px-2 white-color rounder-border'
+                    >
+                      Check Out
+                    </div>
+                }
+              </div>
+            </>
+          )
+        )}
+        {/*End of shopping cart page--------------------------------------------------*/}
 
-        </>
-      )}
-      {/*End of shopping cart page--------------------------------------------------*/}
+        {/*Start of orders page---------------------------------------------------------------*/}
+        {loginState.productordering.length === 0 ? (showorder && <h2>You do not have any orders yet</h2>) :
+          (showorder && productorderingjsx)
+        }
+        {/*End of orders page-------------------------------------------------------------------*/}
 
-      {/*Start of orders page---------------------------------------------------------------*/}
-      {loginState.productordering.length === 0 ? (showorder && <h2>You do not have any orders yet</h2>) :
-        (showorder && productorderingjsx)
-      }
-      {/*End of orders page-------------------------------------------------------------------*/}
-
-      {/*Start of orderhistory page*/}
-      {/*End of orderhistory page*/}
+        {/*Start of orderhistory page*/}
+        {/*End of orderhistory page*/}
+      </Col>
     </Row>
   );
 };

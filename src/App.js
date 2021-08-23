@@ -94,13 +94,6 @@ const App = () => {
         />
       </Route>
 
-      <Route path={"/Checkout/"} exact>
-        <Checkout
-          setshowerrorcard={setshowerrorcard}
-          seterrorcardmessage={seterrorcardmessage}
-        />
-      </Route>
-
       <Route path="/*" exact>
         <Errorhandlepage />
       </Route>
@@ -239,15 +232,14 @@ const App = () => {
               {totalprice < 1 ? (
                 null
               ) : (
-                
-                <Link className='rounder-border white-bg px-3 py-2' style={{textDecoration:'none'}} to={"/Checkout/"}>
                   <div
                     onClick={() => setshowshoppingcart(false)}
                   >
-                    Check Out
+                    <Checkout
+                      setshowerrorcard={setshowerrorcard}
+                      seterrorcardmessage={seterrorcardmessage}
+                    />
                   </div>
-                </Link>
-                
               )}
             </div>
           </>

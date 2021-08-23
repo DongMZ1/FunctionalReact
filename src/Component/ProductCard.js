@@ -73,9 +73,9 @@ const ProductCard = ({
   };
 
   const successfulmessage = (
-    <Modal size='sm' className='rounder-border' show={showaddtocartmessage}>
+    <Modal size='sm' dialogClassName='rounder-border' show={showaddtocartmessage}>
       <Modal.Header>
-        <div className='font-16p text-center width-100'>Successfully add "{producttitle}" to Cart</div>
+        <div className='font-16p rounder-border text-center width-100'>Successfully add "{producttitle}" to Cart</div>
       </Modal.Header>
     </Modal>
   );

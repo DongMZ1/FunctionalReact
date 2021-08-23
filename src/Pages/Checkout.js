@@ -45,37 +45,6 @@ const Checkout = ({setshowerrorcard, seterrorcardmessage}) => {
   }));
   /*end start items user selected-------------------------------------------- */
 
-  /*start print out the product list for items that user selected-------------------- */
-  const productjsx =
-  loginState.productcart
-    .filter((product) => product.checked === true)
-    .map((product) => (
-      <div className="card mb-3">
-        <div className="row g-0">
-          <div className="col-md-2">
-            <img
-              style={{ height: "100px" }}
-              src={product.url}
-              alt="..."
-            />
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              PRODUCT NAME : "{product.title}"
-              <br />
-              price : {product.price} $
-              <span style={{ paddingLeft: "10%" }}>
-                Number: {product.number}
-              </span>
-              <span style={{ paddingLeft: "10%" }}>
-                subtotal: {product.number * product.price} $
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    ));
-    /*end start print out the product list for items that user selected-------------------- */
   
      /*the way to submit payment information to STRIPE----------------------- */
   const handleToken = async (token) => {
@@ -136,8 +105,7 @@ const Checkout = ({setshowerrorcard, seterrorcardmessage}) => {
 
 
   return (
-    <div>
-      {productjsx}
+    <>
       <StripeCheckout
         stripeKey="pk_test_51IhmDWJmnqfDDj8MXwauIMMXW72ZmiFzlNMpxcc22Cvws6ce08QnLQlgbcyI7cgUSJxMuqjxHy3oBuMhGTuWVxAX00NxuYpL09"
         token={handleToken}
@@ -146,17 +114,8 @@ const Checkout = ({setshowerrorcard, seterrorcardmessage}) => {
         billingAddress
         shippingAddress
       />
-      <Link to={"/"}>
-        <Button style={{ marginLeft: "5%" }}>Back to HomePage</Button>
-      </Link>
-      <span style={{ marginLeft: "5%" }}>
-        TOTAL : {totalprice.toFixed(2)} $ + (GST/QST {totalprice.toFixed(2)}
-        *0.15) = {(totalprice * 1.15).toFixed(2)} $
-      </span>
-      <br />
-      <h5>4242 4242 4242 4242 is the correct credit card number for payment</h5>
-      {showsuccessmodal}
-    </div>
+    {showsuccessmodal}
+    </>
   );
 };
 
