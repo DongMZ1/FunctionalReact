@@ -57,16 +57,38 @@
 .width-50 {
     width: 50%;
 }
+.space-between {
+    justify-content: space-between;
+}
+.width-70 {
+    width: 70%;
+}
 .cursor-pointer {
    cursor: pointer;
 }
 
 .lightblue-bg {
-    background-color: rgb(233, 226, 247);
+    background-color: rgb(233, 226, 247) !important;
  }
 
 .lightblue-border {
     border: rgb(233, 226, 247) 4px solid;
+}
+
+.blue-border-thin {
+    border:rgb(74, 120, 218) 2px solid;
+}
+
+.blue-border {
+    border:rgb(74, 120, 218) 4px solid;
+}
+
+.min-height-25rem{
+    min-height: 25rem;
+}
+
+.height-15p {
+    height: 15px;
 }
 
  .width-max-content {
@@ -75,7 +97,9 @@
 .white-color {
     color: white !important;
 }
-
+.border-bottom-none {
+    border-bottom: none;
+}
 .border-bottom-blue {
     border-bottom: blue 2px solid;
 }
@@ -156,6 +180,7 @@ input:-internal-autofill-selected {
 .close span {color: #fff}
 
 .bg-none .modal-content .modal-body {
+    border-radius: 20px;
     background-color: #fff;
 }
 

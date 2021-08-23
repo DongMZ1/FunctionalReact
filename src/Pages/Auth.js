@@ -16,7 +16,8 @@ const Auth = ({ setshowerrorcard, seterrorcardmessage, innerWidth }) => {
 
 
   if (!loginState.isLogin) {
-    return  <Row className='justify-content-center mb-100p mx-4'>
+    return <div className='min-height-25rem'>
+    <Row className='justify-content-center mx-4'>
       <Col sm={3} className='px-3'>
          <div className='mt-100p blue-color'>
            <h5>Welcome to</h5>
@@ -41,6 +42,7 @@ const Auth = ({ setshowerrorcard, seterrorcardmessage, innerWidth }) => {
         />}
         </Col>
     </Row>
+    </div>  
   }
 
   return (

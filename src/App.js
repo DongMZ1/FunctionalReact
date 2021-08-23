@@ -9,7 +9,7 @@ import {
   Link,
   useHistory,
 } from "react-router-dom";
-import { Modal, Button, Card } from "react-bootstrap";
+import { Modal, Button, Row } from "react-bootstrap";
 import useWindowSize from "@rooks/use-window-size"
 /*Component */
 import HomePage from "./Pages/HomePage";
@@ -220,45 +220,39 @@ const App = () => {
       aria-labelledby="example-custom-modal-styling-title"
     >
       <Modal.Header closeButton>
-        <Modal.Title id="example-custom-modal-styling-title">
-          Shopping Cart
-        </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className='border-bottom-none lightblue-bg'>
         {/*start of items in cart */}
         {loginState.productcart.length === 0 ? (
-          "Shopping Cart is Empty"
-        ) : (
-          <ProductCards
-            setshowerrorcard={setshowerrorcard}
-            seterrorcardmessage={seterrorcardmessage}
-            setshowshoppingcart={setshowshoppingcart}
-          />
-        )}
-        {/*end of items in cart */}
+          <div className='width-100 text-center blue-color bold font-16p'>Shopping Cart is Empty</div>
+        ) :
+          <>
+            <ProductCards
+              setshowerrorcard={setshowerrorcard}
+              seterrorcardmessage={seterrorcardmessage}
+              setshowshoppingcart={setshowshoppingcart}
+            />
+            <div className='disp-flex px-4 width-100 blue-color bold font-14p space-between'>
+              <div>
+                TOTAL: {totalprice.toFixed(2)}
+              </div>
+              {totalprice < 1 ? (
+                null
+              ) : (
+                
+                <Link className='rounder-border white-bg px-3 py-2' style={{textDecoration:'none'}} to={"/Checkout/"}>
+                  <div
+                    onClick={() => setshowshoppingcart(false)}
+                  >
+                    Check Out
+                  </div>
+                </Link>
+                
+              )}
+            </div>
+          </>
+        }
       </Modal.Body>
-      <Modal.Footer>
-        TOTAL: {totalprice.toFixed(2)}
-        {totalprice < 1 ? (
-          <Button
-            style={{ marginLeft: "10%", marginRight: "10%" }}
-            variant="primary"
-            disabled={true}
-          >
-            Check Out
-          </Button>
-        ) : (
-          <Link to={"/Checkout/"}>
-            <Button
-              style={{ marginLeft: "10%", marginRight: "10%" }}
-              variant="primary"
-              onClick={() => setshowshoppingcart(false)}
-            >
-              Check Out
-            </Button>
-          </Link>
-        )}
-      </Modal.Footer>
     </Modal>
   );
 

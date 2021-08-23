@@ -36,7 +36,7 @@ const Topnavbar = ({ loginState, setLoginDispatch, setshowshoppingcart, innerWid
     return (
         <>
 
-            <div className={`disp-flex width-100 py-2 ${innerWidth > 768 ? 'static' : 'fixed z-100 white-bg border-bottom-blue'}`} style={{ height: 'max-content' }}>
+            <div className={`disp-flex bold width-100 py-2 ${innerWidth > 768 ? 'static' : 'fixed z-100 white-bg border-bottom-blue'}`} style={{ height: 'max-content' }}>
                 <LinkContainer to={'/'}>
                     <Nav.Link>
                         <AiFillShop fontSize="30px" /><span style={{ whiteSpace: "nowrap", fontSize: '15px' }}>Home</span>
