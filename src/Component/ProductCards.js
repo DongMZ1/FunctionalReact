@@ -127,7 +127,7 @@ const ProductCards = ({ setshowerrorcard, seterrorcardmessage, setshowshoppingca
   return (
     <>
       {loginState.productcart.map((product) => (
-        <Row className="white-bg blue-color rounder-border mb-2 mx-3 lightblue-border">
+        <Row className="white-bg blue-color user-select-none rounder-border mb-2 mx-3 lightblue-border">
           <Col className='disp-flex' xs={3}>
             <img
               className='m-auto'

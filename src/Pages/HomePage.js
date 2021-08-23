@@ -48,7 +48,7 @@ const HomePage = ({ loginState, setLoginDispatch, setshowerrorcard, seterrorcard
       <BiSearchAlt2 className='position-absolute blue-color top-5px left-0 mt-2 ml-2' />
         <input
           type="text"
-          className='search-bar px-4 py-2 mb-4'
+          className='search-bar blue-color bold px-4 py-2 mb-4'
           placeholder="Search Items"
           onChange={(e)=>{setshoppingKeyWord(e.target.value)}}
         />

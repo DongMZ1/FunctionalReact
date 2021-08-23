@@ -53,11 +53,11 @@ const AfterLogin = ({ setshowerrorcard, seterrorcardmessage }) => {
   //start show product the user is currently ordering --- user has place the order --------------------------------
 
   return (
-    <Row className='mx-2 mt-3 blue-color min-height-25rem'>
+    <Row className='mx-2 mt-3 blue-color'>
       <Col lg={6} className='offset-lg-2 offset-md-1'>
         <h6 className='width-max-content'>{loginState.email}</h6>
         {/*start button to show view shopping cart ------------------------------------------- */}
-        <div className='disp-flex mb-3'>
+        <div className='disp-flex'>
           <div
             className={`font-14p cursor-pointer bold ${showshoppingcart && 'border-bottom-blue'} width-max-content`}
             onClick={() => {
@@ -113,13 +113,7 @@ const AfterLogin = ({ setshowerrorcard, seterrorcardmessage }) => {
           TOTAL: {totalprice}
           {/**--------------START if totalprice is 0, then do not allow user to check out */}
           {totalprice < 1 ? (
-            <Button
-              style={{ marginLeft: "10%", marginRight: "10%" }}
-              variant="primary"
-              disabled={true}
-            >
-              Check Out
-            </Button>
+            null
           ) : (
             <Link to={"/Checkout/"}>
               <Button

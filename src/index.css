@@ -109,8 +109,7 @@
     font-size: 14px;
 }
 .search-bar::placeholder {
-    color: rgb(74, 120, 218);
-    font-weight: 700;
+    color: skyblue;
 }
 
 .gray-color {
@@ -198,6 +197,6 @@ input:-internal-autofill-selected {
 }
 
 .input-field::placeholder {
-    color: skyblue;
+    color:skyblue;
 }
 

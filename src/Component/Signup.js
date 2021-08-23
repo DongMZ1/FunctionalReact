@@ -50,16 +50,16 @@ const Signup = ({ setshowerrorcard, seterrorcardmessage, setLoginOrSignup, inner
   /*sign up page */
 
   return <div className={(innerWidth > 768 && 'mt-100p')}>
-      <input className='input-field font-14p px-3' type="email" name="email" placeholder="Email" onChange={signuphandleinputchange} />
+      <input className='input-field bold blue-color font-14p px-3' type="email" name="email" placeholder="Email" onChange={signuphandleinputchange} />
       <div className="font-12p min-height-12p blue-color ml-2 bold mb-1">
         {!signupformdataisvalid && signupformdataerror.email}
       </div>
-      <input className='input-field font-14p px-3' type="password" name="password" placeholder="Password" onChange={signuphandleinputchange} />
+      <input className='input-field bold blue-color font-14p px-3' type="password" name="password" placeholder="Password" onChange={signuphandleinputchange} />
       <div className="font-12p min-height-12p blue-color ml-2 bold mb-1">
         {!signupformdataisvalid && signupformdataerror.password}
       </div>
 
-        <input className='input-field font-14p px-3' type="password" name="passwordrepeat" placeholder="Password" onChange={signuphandleinputchange} />
+        <input className='input-field bold blue-color font-14p px-3' type="password" name="passwordrepeat" placeholder="Password" onChange={signuphandleinputchange} />
         <div className="font-12p min-height-12p blue-color bold ml-2 mb-1">
           {!signupformdataisvalid && signupformdataerror.password}
         </div>
