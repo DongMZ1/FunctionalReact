@@ -76,7 +76,7 @@ const Checkout = ({setshowerrorcard, seterrorcardmessage}) => {
         productordering:[],
         productfinished: []
     })
-    history.push('/');
+    //history.push('/');
  }
  /*END of token is expired*/
 

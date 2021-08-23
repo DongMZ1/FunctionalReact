@@ -85,7 +85,6 @@ const App = () => {
           seterrorcardmessage={seterrorcardmessage}
         />
       </Route>
-
       <Route path={"/Auth/*"} exact>
         <Auth
           innerWidth={innerWidth}
@@ -93,7 +92,6 @@ const App = () => {
           seterrorcardmessage={seterrorcardmessage}
         />
       </Route>
-
       <Route path="/*" exact>
         <Errorhandlepage />
       </Route>
@@ -232,14 +230,11 @@ const App = () => {
               {totalprice < 1 ? (
                 null
               ) : (
-                  <div
-                    onClick={() => setshowshoppingcart(false)}
-                  >
                     <Checkout
+                      setshowshoppingcart={setshowshoppingcart}
                       setshowerrorcard={setshowerrorcard}
                       seterrorcardmessage={seterrorcardmessage}
                     />
-                  </div>
               )}
             </div>
           </>
