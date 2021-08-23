@@ -140,7 +140,7 @@ const ProductCards = ({ setshowerrorcard, seterrorcardmessage, setshowshoppingca
             <div className='font-16p'>
             {product.title}
             </div>
-            <div className='font-14p'>
+            <div className='font-14p white-space-nowrap'>
             Price Per Item : <b>{product.price}</b> <span className='ml-2'>Subtotal: <b>{(product.price * product.number).toFixed(2)}</b></span>
             </div>
             <div className='disp-flex mb-1'>

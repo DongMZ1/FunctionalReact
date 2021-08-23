@@ -53,7 +53,9 @@
 .rounder-border {
     border-radius: 20px;
 }
-
+.white-space-nowrap {
+    white-space: nowrap;
+}
 .width-50 {
     width: 50%;
 }

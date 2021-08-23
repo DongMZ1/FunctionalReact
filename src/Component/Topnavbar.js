@@ -61,7 +61,7 @@ const Topnavbar = ({ loginState, setLoginDispatch, setshowshoppingcart, innerWid
 
             </div>
             {
-                (innerWidth) < 700 && <div className='height-100p'>
+                (innerWidth) < 769 && <div className='height-100p'>
 
                 </div>
             }
