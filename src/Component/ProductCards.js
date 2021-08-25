@@ -4,7 +4,7 @@ import { Container, Button, Row, Col } from "react-bootstrap";
 import { useHistory } from 'react-router-dom'
 import {MdRadioButtonChecked, MdRadioButtonUnchecked} from 'react-icons/md'
 
-const ProductCards = ({ setshowerrorcard, seterrorcardmessage, setshowshoppingcart }) => {
+const ProductCards = ({ setshowerrorcard, seterrorcardmessage, setshowshoppingcart, innerWidth}) => {
   const { loginState, setLoginDispatch } = useContext(LoginContext);
   const history = useHistory();
   const decrease = async (product) => {
@@ -127,8 +127,8 @@ const ProductCards = ({ setshowerrorcard, seterrorcardmessage, setshowshoppingca
   return (
     <>
       {loginState.productcart.map((product) => (
-        <Row className="white-bg blue-color user-select-none rounder-border mb-2 mx-3 lightblue-border">
-          <Col className='disp-flex' xs={3}>
+        <Row className={`white-bg blue-color user-select-none rounder-border mb-2 ${innerWidth > 768 && 'mx-3'} lightblue-border`}>
+          <Col className='disp-flex px-0' xs={3}>
             <img
               className='m-auto'
               style={{ height: "100px" }}
@@ -140,10 +140,10 @@ const ProductCards = ({ setshowerrorcard, seterrorcardmessage, setshowshoppingca
             <div className='font-16p'>
             {product.title}
             </div>
-            <div className='font-14p white-space-nowrap'>
+            <div className={`${innerWidth < 768? 'font-12p':'font-14p white-space-nowrap'}`}>
             Price Per Item : <b>{product.price}</b> <span className='ml-2'>Subtotal: <b>{(product.price * product.number).toFixed(2)}</b></span>
             </div>
-            <div className='disp-flex mb-1'>
+            <div className={`disp-flex mb-1`}>
               {/*start button for decrease the number of product in cart ------------------------------------------------ */}
               <div
                 className='blue-border-thin width-max-content cursor-pointer font-12p blue-color rounder-border px-2 py-1'

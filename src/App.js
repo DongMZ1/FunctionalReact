@@ -219,6 +219,7 @@ const App = () => {
         ) :
           <>
             <ProductCards
+              innerWidth={innerWidth}
               setshowerrorcard={setshowerrorcard}
               seterrorcardmessage={seterrorcardmessage}
               setshowshoppingcart={setshowshoppingcart}
@@ -259,6 +260,7 @@ const App = () => {
         {router}
         {shoppingcart}
         <ErrorCard
+          innerWidth={innerWidth}
           show={showerrorcard}
           message={errorcardmessage}
           setshow={setshowerrorcard}
