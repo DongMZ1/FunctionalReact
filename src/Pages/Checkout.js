@@ -113,7 +113,11 @@ const Checkout = ({setshowerrorcard, seterrorcardmessage}) => {
         name={`Pay ${(totalprice*1.15).toFixed(2)} $ for your ORDER`}
         billingAddress
         shippingAddress
-      />
+      >
+        <button className="white-color blue-bg outline-none bold px-2 align-content-center py-1 font-16p rounder-border">
+            check out
+        </button>
+        </StripeCheckout>
     {showsuccessmodal}
     </>
   );

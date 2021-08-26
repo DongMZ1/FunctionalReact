@@ -2,8 +2,9 @@ import React, { useContext, useState, useMemo } from "react";
 import { LoginContext } from "../usecontext/logincontext";
 import { Container, Button, Row, Col } from "react-bootstrap";
 import ProductCards from "../Component/ProductCards";
+import Checkout from "./Checkout";
 import { Link } from "react-router-dom";
-const AfterLogin = ({ setshowerrorcard, seterrorcardmessage }) => {
+const AfterLogin = ({ setshowerrorcard, seterrorcardmessage}) => {
   const { loginState, setLoginDispatch } = useContext(LoginContext);
   const [showshoppingcart, setshowshoppingcart] = useState(true);
   const [showorder, setshoworder] = useState(false);
@@ -110,11 +111,11 @@ const AfterLogin = ({ setshowerrorcard, seterrorcardmessage }) => {
                   Estimated Total: <b>{(totalprice * 1.15).toFixed(2)}</b>
                 </div>
                 {totalprice > 1 &&
-                    <div
-                      className='blue-bg height-max-content cursor-pointer font-14p bold mr-4 py-1 px-2 white-color rounder-border'
-                    >
-                      Check Out
-                    </div>
+                    <Checkout
+                    setshowshoppingcart={setshowshoppingcart}
+                    setshowerrorcard={setshowerrorcard}
+                    seterrorcardmessage={seterrorcardmessage}
+                  />
                 }
               </div>
             </>

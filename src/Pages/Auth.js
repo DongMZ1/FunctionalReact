@@ -6,7 +6,7 @@ import { LoginContext } from '../usecontext/logincontext'
 import Signup from '../Component/Signup'
 import Login from '../Component/Login'
 
-const Auth = ({ setshowerrorcard, seterrorcardmessage, innerWidth }) => {
+const Auth = ({ setshowerrorcard, seterrorcardmessage, innerWidth, setshowshoppingcart }) => {
   const { loginState, setLoginDispatch } = useContext(LoginContext)
 
   const history = useHistory();
@@ -46,7 +46,7 @@ const Auth = ({ setshowerrorcard, seterrorcardmessage, innerWidth }) => {
   }
 
   return (
-    <AfterLogin setshowerrorcard={setshowerrorcard} seterrorcardmessage={seterrorcardmessage} />
+    <AfterLogin setshowshoppingcart={setshowshoppingcart} setshowerrorcard={setshowerrorcard} seterrorcardmessage={seterrorcardmessage} />
   )
 
 }

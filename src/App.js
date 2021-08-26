@@ -87,6 +87,7 @@ const App = () => {
       </Route>
       <Route path={"/Auth/*"} exact>
         <Auth
+          setshowshoppingcart={setshowshoppingcart}
           innerWidth={innerWidth}
           setshowerrorcard={setshowerrorcard}
           seterrorcardmessage={seterrorcardmessage}
@@ -231,11 +232,13 @@ const App = () => {
               {totalprice < 1 ? (
                 null
               ) : (
+                <div className='height-max-content'>
                     <Checkout
                       setshowshoppingcart={setshowshoppingcart}
                       setshowerrorcard={setshowerrorcard}
                       seterrorcardmessage={seterrorcardmessage}
                     />
+                    </div>
               )}
             </div>
           </>

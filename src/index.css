@@ -50,6 +50,8 @@
     height: max-content;
 }
 
+
+
 .blue-bg {
    background-color: rgb(74, 120, 218);
 }
@@ -201,6 +203,8 @@ input:-internal-autofill-selected {
 }
 .outline-none {
     outline: none;
+    text-decoration: none;
+    border: none;
 }
 
 .input-field {
