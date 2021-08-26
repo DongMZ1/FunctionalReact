@@ -95,6 +95,10 @@
     min-height: 25rem;
 }
 
+.user-select-none {
+    user-select: none;
+}
+
 .height-15p {
     height: 15px;
 }

@@ -22,7 +22,9 @@ const Auth = ({ setshowerrorcard, seterrorcardmessage, innerWidth, setshowshoppi
          <div className='mt-100p blue-color'>
            <h5>Welcome to</h5>
            <h6>Mingzhou Shopping Center</h6>
-           <div className='font-14p'>Mingzhou Shopping Center is a Toy e-commerce company headquartered in Montreal, Quebec, Canada.</div>
+           <div className='font-14p'>Mingzhou Shopping Center is a Toy e-commerce company headquartered in Montreal, Quebec, Canada.
+           You are free to buy whatever you want in this shopping site with a fake credit card but nothing will ship to you.
+           </div>
          </div>
       </Col>
       <Col sm={3} className='px-3'>
@@ -46,7 +48,7 @@ const Auth = ({ setshowerrorcard, seterrorcardmessage, innerWidth, setshowshoppi
   }
 
   return (
-    <AfterLogin setshowshoppingcart={setshowshoppingcart} setshowerrorcard={setshowerrorcard} seterrorcardmessage={seterrorcardmessage} />
+    <AfterLogin innerWidth={innerWidth} setshowshoppingcart={setshowshoppingcart} setshowerrorcard={setshowerrorcard} seterrorcardmessage={seterrorcardmessage} />
   )
 
 }

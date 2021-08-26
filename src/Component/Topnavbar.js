@@ -36,27 +36,27 @@ const Topnavbar = ({ loginState, setLoginDispatch, setshowshoppingcart, innerWid
     return (
         <>
 
-            <div className={`disp-flex bold width-100 py-2 ${innerWidth > 768 ? 'static' : 'fixed z-100 white-bg border-bottom-blue'}`} style={{ height: 'max-content' }}>
+            <div className={`disp-flex blue-color bold width-100 py-2 ${innerWidth > 768 ? 'static' : 'fixed z-100 white-bg border-bottom-blue'}`} style={{ height: 'max-content' }}>
                 <LinkContainer to={'/'}>
-                    <Nav.Link>
+                    <div className={`${innerWidth > 768 ? 'px-3' : 'px-2'} user-select-none cursor-pointer py-2`}>
                         <AiFillShop fontSize="30px" /><span style={{ whiteSpace: "nowrap", fontSize: '15px' }}>Home</span>
-                    </Nav.Link>
+                    </div>
                 </LinkContainer>
 
                 <LinkContainer to={'/Auth/' + loginState.email}>
-                    <Nav.Link>
+                <div className={`${innerWidth > 768 ? 'px-3' : 'px-2'} user-select-none cursor-pointer py-2`}>
                         <MdAccountCircle fontSize="30px" /><span style={{ whiteSpace: "nowrap", fontSize: '15px' }}>Account</span>
-                    </Nav.Link>
+                    </div>
                 </LinkContainer>
                 {loginState.isLogin &&
-                    <Nav.Link className='ml-auto' onClick={() => setshowshoppingcart(show => !show)}>
+                     <div className={`${innerWidth > 768 ? 'px-3' : 'px-2'} user-select-none cursor-pointer py-2 ml-auto`} onClick={() => setshowshoppingcart(show => !show)}>
                         <AiOutlineShoppingCart fontSize="30px" /><span style={{ whiteSpace: "nowrap", fontSize: '15px' }}>Shopping Cart</span>
-                    </Nav.Link>
+                    </div>
                 }
                 {loginState.isLogin &&
-                    <Nav.Link onClick={handlelogout}>
+                    <div className={`${innerWidth > 768 ? 'px-3' : 'px-2'} user-select-none cursor-pointer py-2`} onClick={handlelogout}>
                         <AiOutlineLogout fontSize="30px" /><span style={{ whiteSpace: "nowrap", fontSize: '15px' }}>log out</span>
-                    </Nav.Link>
+                    </div>
                 }
 
             </div>

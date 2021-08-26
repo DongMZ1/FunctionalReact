@@ -1,5 +1,6 @@
 import React, { useState, useReducer, useEffect } from "react";
 import { LoginContext } from "./usecontext/logincontext";
+import { AiOutlineShoppingCart } from 'react-icons/ai'
 import './index.css'
 import {
   BrowserRouter as Router,
@@ -9,7 +10,7 @@ import {
   Link,
   useHistory,
 } from "react-router-dom";
-import { Modal, Button, Row } from "react-bootstrap";
+import { Modal, Button, Row, Col } from "react-bootstrap";
 import useWindowSize from "@rooks/use-window-size"
 /*Component */
 import HomePage from "./Pages/HomePage";
@@ -216,7 +217,7 @@ const App = () => {
       <Modal.Body className='border-bottom-none lightblue-bg'>
         {/*start of items in cart */}
         {loginState.productcart.length === 0 ? (
-          <div className='width-100 text-center blue-color bold font-16p'>Shopping Cart is Empty</div>
+          <div className='width-100 text-center blue-color bold font-16p'><AiOutlineShoppingCart fontSize='35px' /> Your Cart is Empty</div>
         ) :
           <>
             <ProductCards
@@ -225,22 +226,28 @@ const App = () => {
               seterrorcardmessage={seterrorcardmessage}
               setshowshoppingcart={setshowshoppingcart}
             />
-            <div className='disp-flex px-4 width-100 blue-color bold font-14p space-between'>
-              <div>
-                TOTAL: {totalprice.toFixed(2)}
+            <div className='disp-flex px-4 width-100 blue-color font-14p space-between'>
+              <div className='blue-color ml-2'>(Product Subtotal : <b>{totalprice}</b> + (GST/QST : <b>{(totalprice * 0.15).toFixed(2)}</b>)
+                <br />
+                Estimated Total: <b>{(totalprice * 1.15).toFixed(2)}</b>
               </div>
               {totalprice < 1 ? (
                 null
               ) : (
                 <div className='height-max-content'>
-                    <Checkout
-                      setshowshoppingcart={setshowshoppingcart}
-                      setshowerrorcard={setshowerrorcard}
-                      seterrorcardmessage={seterrorcardmessage}
-                    />
-                    </div>
+                  <Checkout
+                    setshowshoppingcart={setshowshoppingcart}
+                    setshowerrorcard={setshowerrorcard}
+                    seterrorcardmessage={seterrorcardmessage}
+                  />
+                </div>
               )}
             </div>
+            <Row >
+              <Col className='font-16p pl-4 ml-3 bold blue-color'>
+                Using 4242 4242 4242 4242 as card number, Any 3 digits of CVC and Any future date to complete purchase.
+              </Col>
+            </Row>
           </>
         }
       </Modal.Body>
