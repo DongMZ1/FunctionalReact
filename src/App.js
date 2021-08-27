@@ -227,7 +227,7 @@ const App = () => {
               setshowshoppingcart={setshowshoppingcart}
             />
             <div className='disp-flex px-4 width-100 blue-color font-14p space-between'>
-              <div className='blue-color ml-2'>(Product Subtotal : <b>{totalprice}</b> + (GST/QST : <b>{(totalprice * 0.15).toFixed(2)}</b>)
+              <div className='blue-color ml-2'>(Product Subtotal : <b>{totalprice.toFixed(2)}</b> + (GST/QST : <b>{(totalprice * 0.15).toFixed(2)}</b>)
                 <br />
                 Estimated Total: <b>{(totalprice * 1.15).toFixed(2)}</b>
               </div>
